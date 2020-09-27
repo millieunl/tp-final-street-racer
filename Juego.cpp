@@ -5,13 +5,14 @@
 
 //contructor
 Juego::Juego() {
-	
 	//inicia una instancia en memoria dinamica para el objeto auto
+	textbackground(DARKGRAY);
+	clrscr();
 	auto1 = new Auto();
 	ui = new Ui();
 	//setea los limites de la pantalla
-	auto1->setLimite(30,90,0,45);
-	
+	//auto1->setLimite(25,90,0,45);
+	auto1->setLimite(30,85,0,45);
 }
 
 //destructor de clase
@@ -39,13 +40,12 @@ void Juego::eventos(){
 }
 
 void Juego::jugar(){
+	
 	while(true){
 		ui->actualizar();
 		eventos();
 		auto1->actualizar();
-		
 	}
-	
 	
 	/*
 	clock_t tiempoInicial = clock();

@@ -4,8 +4,6 @@
 #include<iostream>
 #include <ctime>
 
-
-
 class Auto {
 public:
 	Auto();
@@ -30,7 +28,11 @@ public:
 	clock_t tempo;
 	clock_t paso;
 	
-	
+	//borrar
+	unsigned long int fps = 1;
+	int fps2 = 0;
+	clock_t tempo2 = clock();
+	clock_t paso2 = CLOCKS_PER_SEC/5000;
 	~Auto();
 private:
 	

@@ -11,8 +11,14 @@ public:
 	clock_t paso;
 	int alto;
 	int ancho;
+	int puntaje;
 	void actualizar();
 	void dibujar();
+	void barrasLaterales();
+	void carretera();
+	void setPuntaje(int puntaje);
+	int getPuntaje();
+	void mostrarPuntaje();
 private:
 };
 

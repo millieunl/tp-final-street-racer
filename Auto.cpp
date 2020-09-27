@@ -3,6 +3,7 @@
 
 
 Auto::Auto() {
+	
 	tempo = clock();
 	paso = CLOCKS_PER_SEC/60;
 	
@@ -23,6 +24,7 @@ Auto::Auto() {
 	matriz[2][3] = 205;
 	matriz[2][4] = 219;
 	
+	
 	//carga la matriz con los colores
 	color[0][0] = 0;  //rueda
 	color[0][1] = 0;
@@ -41,14 +43,33 @@ Auto::Auto() {
 	color[2][4] = 0;    //rueda
 	
 	
-	
+	/*
+	//despues borras esto para test AUTO BLANCO
+	color[0][0] = 15;  //rueda
+	color[0][1] = 15;
+	color[0][2] = 15;  //punta
+	color[0][3] = 15;
+	color[0][4] = 15;   //rueda
+	color[1][0] = 15;
+	color[1][1] = 15;   //costado izq
+	color[1][2] = 15;   //cabina
+	color[1][3] = 15;   //costado dere
+	color[1][4] = 15;
+	color[2][0] = 15;    //rueda
+	color[2][1] = 15;
+	color[2][2] = 15;    //cola
+	color[2][3] = 15;
+	color[2][4] = 15;    //rueda
+	*/
 	//carga la posicion en x,y
-	x = 40 ;
-	y = 26;
+	//x = 26 ;
+	x = 31;
+	y = 23;
 	
 	//cargar valor para fila y columna de la matriz
 	ancho = 5;
 	alto = 3;
+	
 }
 
 Auto::~Auto() {
@@ -67,28 +88,39 @@ void Auto::dibujar(){
 		std::cout<<std::endl;
 	}
 	
-	
-	
 }
 void Auto::moverDerecha() {
 	if(x + ancho < maxLimiteX) { borrar(); x = x + ancho;}
 }
 
 void Auto::moverIzquierda() {
-	if(x - ancho > minLimiteX) { borrar(); x = x - ancho;}
+	//if(x+1 > minLimiteX) { borrar(); x = x - ancho;}
+	if(x - ancho < minLimiteX) return;
+	else{
+		borrar(); 
+		x = x-ancho;
+	}
 }
 
 
 void Auto::actualizar() {
+	
 	if(tempo + paso < clock()) {
+		//fps++;
+		//gotoxy(31,26);		
+		//std::cout<<fps;
 		dibujar();
 		tempo = clock();
 	}
+	
+	
 }
 
 void Auto::borrar() {
+	
 	for(int i = 0; i < alto; i++) {
 		for (int j = 0; j < ancho; j++) {
+			textbackground(DARKGRAY);
 			gotoxy(x+j,y+i);
 			std::cout<<" ";
 		}
