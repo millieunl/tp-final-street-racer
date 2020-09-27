@@ -4,6 +4,7 @@
 #include<iostream>
 
 #include "Auto.h"
+#include "Ui.h"
 
 class Juego {
 public:
@@ -17,6 +18,7 @@ public:
 	
 private:
 	Auto *auto1;			//objeto auto principal
+	Ui *ui;
 };
 
 #endif
