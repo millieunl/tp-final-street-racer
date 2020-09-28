@@ -10,15 +10,20 @@ Juego::Juego() {
 	clrscr();
 	auto1 = new Auto();
 	ui = new Ui();
+	nivel = new Nivel();
+	
 	//setea los limites de la pantalla
-	//auto1->setLimite(25,90,0,45);
 	auto1->setLimite(30,85,0,45);
+	
+	//dibuja el nivel una sola vez
+	nivel->dibujar();
 }
 
 //destructor de clase
 Juego::~Juego() {
 	delete auto1;
 	delete ui;
+	delete nivel;
 }
 
 void Juego::eventos(){
@@ -40,9 +45,9 @@ void Juego::eventos(){
 }
 
 void Juego::jugar(){
-	
 	while(true){
 		ui->actualizar();
+		nivel->actualizar();
 		eventos();
 		auto1->actualizar();
 	}
