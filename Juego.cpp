@@ -8,20 +8,25 @@ Juego::Juego() {
 	//inicia una instancia en memoria dinamica para el objeto auto
 	textbackground(DARKGRAY);
 	clrscr();
-	auto1 = new Auto();
+	jugador = new Jugador();
 	ui = new Ui();
 	nivel = new Nivel();
 	
-	//setea los limites de la pantalla
-	auto1->setLimite(30,85,0,45);
+	//setea la posicion inicial del auto del jugador
+	jugador->setPosicion(31,23);  //x = 31 y = 23
+	
+	//setea los limites de la ruta donde se mueve el auto
+	jugador->setLimite(30,85,0,45);
 	
 	//dibuja el nivel una sola vez
 	nivel->dibujar();
+	
+	
 }
 
 //destructor de clase
 Juego::~Juego() {
-	delete auto1;
+	delete jugador;
 	delete ui;
 	delete nivel;
 }
@@ -33,12 +38,12 @@ void Juego::eventos(){
 		case 67:
 		case 77://derecha
 			//llama funcion para moverse a la derecha
-			auto1->moverDerecha();
+			jugador->moverDerecha();
 			break;
 		case 68:
 		case 75://izquierda
 			//llama funcion para moverse a la izquierda
-			auto1->moverIzquierda();
+			jugador->moverIzquierda();
 			break;
 		}
 	}
@@ -49,7 +54,7 @@ void Juego::jugar(){
 		ui->actualizar();
 		nivel->actualizar();
 		eventos();
-		auto1->actualizar();
+		jugador->actualizar();
 	}
 	
 	/*

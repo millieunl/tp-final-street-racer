@@ -3,9 +3,10 @@
 
 #include<iostream>
 
-#include "Auto.h"
 #include "Ui.h"
 #include "Nivel.h"
+#include "Jugador.h"
+
 
 class Juego {
 public:
@@ -18,9 +19,10 @@ public:
 	
 	
 private:
-	Auto *auto1;			//objeto auto principal
+	Jugador *jugador;
 	Ui *ui;
 	Nivel *nivel;
+	
 };
 
 #endif
