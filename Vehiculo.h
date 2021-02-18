@@ -24,7 +24,7 @@ public:
 	
 	//metodos 
 	void dibujar();
-	void actualizar();
+	virtual void actualizar() = 0 ;
 	void borrar();
 	void setLimite(int x0, int x1, int y0, int y1);
 	void setPosicion(int x, int y);
@@ -35,6 +35,7 @@ public:
 	
 	//destructor de clase
 	~Vehiculo();
+	
 private:
 };
 

@@ -26,18 +26,23 @@ Jugador::Jugador() {
 	
 }
 
+void Jugador::actualizar(){
+	if(tempo + paso < clock()) {
+		dibujar();
+		tempo = clock();
+	}
+}
 void Jugador::moverDerecha() {
-	
-	if(x + ancho < maxLimiteX) { borrar(); x = x + ancho;}
-	
+	if(x + ancho  <= maxLimiteX) {
+		borrar(); 
+		x++;
+	}
 }
 
 void Jugador::moverIzquierda() {
-	
-	if(x - ancho < minLimiteX) return;
-	else{
+	if(x > minLimiteX ){
 		borrar(); 
-		x = x-ancho;
+		x--;
 	}
 }
 

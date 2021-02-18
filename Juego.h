@@ -6,6 +6,7 @@
 #include "Ui.h"
 #include "Nivel.h"
 #include "Jugador.h"
+#include "LotusPoni.h"
 
 
 class Juego {
@@ -20,6 +21,7 @@ public:
 	
 private:
 	Jugador *jugador;
+	LotusPoni lotusPoni;
 	Ui *ui;
 	Nivel *nivel;
 	

@@ -8,6 +8,7 @@ public:
 	Jugador();
 	~Jugador();
 	
+	void actualizar();
 	void moverIzquierda();
 	void moverDerecha();
 	

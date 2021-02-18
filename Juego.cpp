@@ -1,10 +1,12 @@
 #include "Juego.h"
 #include <conio2.h>
+#include <stdlib.h>
 
 
 
 //contructor
 Juego::Juego() {
+	srand (time(NULL));
 	//inicia una instancia en memoria dinamica para el objeto auto
 	textbackground(DARKGRAY);
 	clrscr();
@@ -15,8 +17,12 @@ Juego::Juego() {
 	//setea la posicion inicial del auto del jugador
 	jugador->setPosicion(31,23);  //x = 31 y = 23
 	
+	//setea la posicion del enemigo LotusPoni
+	lotusPoni.setPosicion(31,4);
+	
+	
 	//setea los limites de la ruta donde se mueve el auto
-	jugador->setLimite(30,85,0,45);
+	//jugador->setLimite(30,85,1,45);
 	
 	//dibuja el nivel una sola vez
 	nivel->dibujar();
@@ -55,6 +61,8 @@ void Juego::jugar(){
 		nivel->actualizar();
 		eventos();
 		jugador->actualizar();
+		
+		lotusPoni.actualizar();
 	}
 	
 	/*

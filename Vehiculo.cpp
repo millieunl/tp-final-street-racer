@@ -3,6 +3,7 @@
 
 Vehiculo::Vehiculo() {
 	
+	
 	//cargar matriz con el dibujo del auto generico
 	matriz[0][0] = 219;
 	matriz[0][1] = 205;
@@ -23,6 +24,11 @@ Vehiculo::Vehiculo() {
 	//guardamos el ancho y alto de la matriz
 	ancho = 5; 
 	alto = 3; 
+	
+	maxLimiteX = 85;
+	minLimiteX = 31;
+	maxLimiteY = 45;
+	minLimiteY = 1;
 }
 
 void Vehiculo::dibujar(){
@@ -37,13 +43,7 @@ void Vehiculo::dibujar(){
 		std::cout<<std::endl;
 	}
 }
-void Vehiculo::actualizar(){
-	if(tempo + paso < clock()) {
-		dibujar();
-		tempo = clock();
-	}
-	
-}
+
 void Vehiculo::borrar(){
 	for(int i = 0; i < alto; i++) {
 		for (int j = 0; j < ancho; j++) {
