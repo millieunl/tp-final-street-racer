@@ -25,9 +25,10 @@ Vehiculo::Vehiculo() {
 	ancho = 5; 
 	alto = 3; 
 	
+	//limites maximos y minimos para x e y, sirven para limitar el movimiento de los autos
 	maxLimiteX = 85;
 	minLimiteX = 31;
-	maxLimiteY = 45;
+	maxLimiteY = 27;
 	minLimiteY = 1;
 }
 

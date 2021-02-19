@@ -11,18 +11,13 @@ Juego::Juego() {
 	textbackground(DARKGRAY);
 	clrscr();
 	jugador = new Jugador();
+	lotusPoni =new LotusPoni();
 	ui = new Ui();
 	nivel = new Nivel();
 	
 	//setea la posicion inicial del auto del jugador
 	jugador->setPosicion(31,23);  //x = 31 y = 23
 	
-	//setea la posicion del enemigo LotusPoni
-	lotusPoni.setPosicion(31,4);
-	
-	
-	//setea los limites de la ruta donde se mueve el auto
-	//jugador->setLimite(30,85,1,45);
 	
 	//dibuja el nivel una sola vez
 	nivel->dibujar();
@@ -33,6 +28,7 @@ Juego::Juego() {
 //destructor de clase
 Juego::~Juego() {
 	delete jugador;
+	delete lotusPoni;
 	delete ui;
 	delete nivel;
 }
@@ -61,8 +57,9 @@ void Juego::jugar(){
 		nivel->actualizar();
 		eventos();
 		jugador->actualizar();
+		//lotusPoni->actualizar();
+		truenoLoco.actualizar();
 		
-		lotusPoni.actualizar();
 	}
 	
 	/*

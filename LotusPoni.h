@@ -9,8 +9,6 @@ public:
 	LotusPoni();
 	~LotusPoni();
 	
-	int posX;
-	int posY;
 	void actualizar();
 	void mover();
 	

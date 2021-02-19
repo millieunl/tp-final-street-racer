@@ -2,10 +2,10 @@
 
 
 LotusPoni::LotusPoni() {
-	//posiciona el auto del enemigo
+	//posiciona el auto del enemigo en una posicion fija en "Y" pero random en "X"
 	x = minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) );
-	y = 1;
-	
+	y = 3;
+
 	tempo = clock();
 	paso = CLOCKS_PER_SEC/5;
 	
@@ -34,19 +34,17 @@ void LotusPoni::actualizar(){
 		dibujar();
 		tempo = clock();
 	}
-	
 }
 
 void LotusPoni:: mover(){
-	if (y + alto < 27){
+	if (y + alto < maxLimiteY){
 		borrar();
 		y++;;
 	}else {
 		borrar();
-		x = minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) );
-		y = 3;
+		setPosicion(minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) ),3);
+		
 	}
-	
 	
 }
 LotusPoni::~LotusPoni() {
