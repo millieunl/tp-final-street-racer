@@ -8,7 +8,7 @@
 #include "Jugador.h"
 #include "LotusPoni.h"
 #include "TruenoLoco.h"
-
+#include "Vehiculo.h"
 
 
 class Juego {
@@ -22,17 +22,19 @@ public:
 	
 	
 private:
-	Jugador *jugador;
-	LotusPoni *lotusPoni;
-	TruenoLoco *truenoLoco;
+	//Jugador *jugador;
+	Vehiculo *jugador;
+	Vehiculo *lotusPoni;
+	Vehiculo *truenoLoco;
 	Ui *ui;
 	Nivel *nivel;
 	
 	bool chocoTrueno;
+	bool chocoLotus;
 	
 	//metodos
 	void eventos();
-	bool hayColision( int ancho, int alto, int x0, int y0, int x1, int y1);
+	bool hayColision( Vehiculo *v1, Vehiculo *v2);
 	
 };
 

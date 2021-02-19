@@ -26,6 +26,7 @@ Juego::Juego() {
 	nivel->dibujar();
 	
 	chocoTrueno = false;
+	chocoLotus = false;
 }
 
 //destructor de clase
@@ -55,57 +56,44 @@ void Juego::eventos(){
 	}
 }
 
-bool Juego::hayColision( int ancho, int alto, int x0, int y0, int x1, int y1){
-	
-	if((x0 < x1 + ancho) && (x0 + ancho > x1) && (y0 < y1 + alto) && (y0 + alto > y1)){
+bool Juego::hayColision(Vehiculo *v1, Vehiculo *v2){
+	//arreglar el tema de los punteros dentro de un argumento, quien libera ese puntero
+	if((v1-> getX() < v2->getX() + v2->getAncho()) &&
+		(v1->getX() + v1->getAncho() > v2->getX()) &&
+	    (v1-> getY() < v2->getY() + v2->getAlto()) &&
+		(v1->getY() + v1->getAlto() > v2->getY())){
 		return true;
 	}
 	return false;
-	/*
-	//chequea si hay colision en un
-	chocoTrueno = hayColision(truenoLoco.ancho, truenoLoco.alto, TruenoLoco.x);
-	chocoPoni = 
-	chocoObstaculo = 
-	
-	if(chocoTrueno){
-	truenoLoco.kill();
-	jugador.kill();
 }
-	void Juego::matar(obejto, quienchoco){
-	if quienchoco{
-	obejto.kill();
-	};
-	*/
 
 
-}
+
 void Juego::jugar(){
 	while(true){
 		ui->actualizar();
 		nivel->actualizar();
 		eventos();
 		jugador->actualizar();
-		//lotusPoni->actualizar();
+		lotusPoni->actualizar();
 		truenoLoco->actualizar();
-		chocoTrueno = hayColision(truenoLoco->getAncho(), truenoLoco->getAlto(), truenoLoco->x, truenoLoco->y, jugador->x, jugador->y);
-		if(chocoTrueno) {
-			gotoxy(1,1);
-			std::cout<<"chocoo"<<std::endl;
-			
+		
+		//deteccion de colision entre autos
+		chocoTrueno = hayColision(jugador,truenoLoco);
+		chocoLotus = hayColision(jugador,lotusPoni);
+		
+		//si hay choque con algun auto
+		//choque con el enemigo truenoLoco
+		if(chocoTrueno){
+			truenoLoco->chocar();
+			jugador->chocar();
+		}
+		//choque con el enemigo LotusPoni
+		if(chocoLotus){
+			lotusPoni->chocar();
+			jugador->chocar();
 		}
 	}
-	
-	/*
-	clock_t tiempoInicial = clock();
-	clock_t tiempoActual;
-	clock_t paso = CLOCKS_PER_SEC/1;
-	while(true) {
-		tiempoActual = clock();
-		if(tiempoActual - tiempoInicial > paso){
-			std::cout<<"hola"<<std::endl;
-			//auto1.update();
-			tiempoInicial = clock();
-		}
-	}
-	*/
+		
+
 }

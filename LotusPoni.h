@@ -10,10 +10,17 @@ public:
 	~LotusPoni();
 	
 	void actualizar();
-	
+	void armarAuto();
+	void moverDerecha(){};
+	void moverIzquierda(){};
+	void moverDiagonalDerecha(){};
+	void moverDiagonalIzquierda(){};
+	void mover();
+	void chocar();
 	
 private:
-	void mover();
+	void reiniciarLotus();
+	
 };
 
 #endif

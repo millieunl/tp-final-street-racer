@@ -11,6 +11,28 @@ TruenoLoco::TruenoLoco() {
 	tempo = clock();
 	paso = CLOCKS_PER_SEC/10;
 	
+	
+	//dibujo del auto Trueno Loco
+	armarAuto();
+}
+void TruenoLoco::armarAuto(){
+	//cargar matriz con el dibujo 
+	matriz[0][0] = 219;
+	matriz[0][1] = 205;
+	matriz[0][2] = 178;
+	matriz[0][3] = 205;
+	matriz[0][4] = 219;
+	matriz[1][0] = ' ';
+	matriz[1][1] = 47;
+	matriz[1][2] = 219;
+	matriz[1][3] = 92;
+	matriz[1][4] = ' ';
+	matriz[2][0] = 219;
+	matriz[2][1] = 205;
+	matriz[2][2] = 178;
+	matriz[2][3] = 205;
+	matriz[2][4] = 219;
+	
 	//carga la matriz con los colores del auto del enemigo LotusPoni
 	color[0][0] = 0;  //rueda es negra
 	color[0][1] = 0;
@@ -28,7 +50,6 @@ TruenoLoco::TruenoLoco() {
 	color[2][3] = 0;
 	color[2][4] = 0;    //rueda es negra
 }
-
 void TruenoLoco::actualizar(){
 	
 	if(tempo + paso < clock()) {
@@ -36,6 +57,12 @@ void TruenoLoco::actualizar(){
 		dibujar();
 		tempo = clock();
 	}
+}
+void TruenoLoco::reiniciarTrueno(){
+	borrar();
+	x = minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) );
+	y = 3;
+	direccion = rand()% 2;
 }
 
 void TruenoLoco::moverDiagonalDerecha(){
@@ -60,18 +87,19 @@ void TruenoLoco::moverDiagonalIzquierda(){
 
 void TruenoLoco:: mover(){
 	
-	if (y + alto < maxLimiteY){
-		if( direccion == 0) moverDiagonalIzquierda();
+	if( y + alto < maxLimiteY ){
+		if( direccion == 0 ) moverDiagonalIzquierda();
 		else moverDiagonalDerecha();
 		y++;
 	}else{
-		borrar();
-		x = minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) );
-		y = 3;
-		direccion = rand()% 2;
+		reiniciarTrueno();
 	}
 	
 	
+}
+//cuando el auto choca se reinicia a su posicion inicial
+void TruenoLoco::chocar(){
+	reiniciarTrueno();
 }
 TruenoLoco::~TruenoLoco() {
 	

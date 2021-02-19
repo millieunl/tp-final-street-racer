@@ -9,6 +9,28 @@ LotusPoni::LotusPoni() {
 	tempo = clock();
 	paso = CLOCKS_PER_SEC/5;
 	
+	////dibujo del auto LotusPoni
+	armarAuto();
+
+}
+void LotusPoni::armarAuto(){
+	//matriz que carga el diseño del auto
+	matriz[0][0] = 219;
+	matriz[0][1] = 205;
+	matriz[0][2] = 178;
+	matriz[0][3] = 205;
+	matriz[0][4] = 219;
+	matriz[1][0] = ' ';
+	matriz[1][1] = 47;
+	matriz[1][2] = 219;
+	matriz[1][3] = 92;
+	matriz[1][4] = ' ';
+	matriz[2][0] = 219;
+	matriz[2][1] = 205;
+	matriz[2][2] = 178;
+	matriz[2][3] = 205;
+	matriz[2][4] = 219;
+	
 	//carga la matriz con los colores del auto del enemigo LotusPoni
 	color[0][0] = 0;  //rueda es negra
 	color[0][1] = 0;
@@ -25,9 +47,7 @@ LotusPoni::LotusPoni() {
 	color[2][2] = 14;    //cola es amarilla
 	color[2][3] = 0;
 	color[2][4] = 0;    //rueda es negra
-
 }
-
 void LotusPoni::actualizar(){
 	if(tempo + paso < clock()) {
 		mover();
@@ -36,16 +56,24 @@ void LotusPoni::actualizar(){
 	}
 }
 
+void LotusPoni::reiniciarLotus(){
+	borrar();
+	setPosicion(minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) ),3);
+}
 void LotusPoni:: mover(){
 	if (y + alto < maxLimiteY){
 		borrar();
 		y++;;
 	}else {
-		borrar();
-		setPosicion(minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) ),3);
+		reiniciarLotus();
 		
 	}
 	
+}
+
+//cuando el auto choca se reinicia a su posicion inicial
+void LotusPoni::chocar(){
+	reiniciarLotus();
 }
 LotusPoni::~LotusPoni() {
 	

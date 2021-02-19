@@ -10,7 +10,32 @@ public:
 	//constructor
 	Vehiculo();
 	
-	//atributos publicos que hacen a las caracteristicas de un auto
+	
+	//metodos 
+	void dibujar();
+	virtual void actualizar() = 0 ;
+	virtual void moverDerecha()= 0;
+	virtual void moverIzquierda()=0;
+	virtual void moverDiagonalDerecha() = 0;
+	virtual void moverDiagonalIzquierda() = 0;
+	virtual void mover() = 0;
+	virtual void chocar() = 0;
+	virtual void armarAuto() = 0;
+	
+	
+	void borrar();
+	void setLimite(int x0, int x1, int y0, int y1);
+	void setPosicion(int x, int y);
+	int getAncho();
+	int getAlto();
+	int getX();
+	int getY();
+	
+
+	//destructor de clase
+	~Vehiculo();
+	
+protected:
 	int x;
 	int y;
 	int matriz[3][5];
@@ -22,23 +47,9 @@ public:
 	int minLimiteX;
 	int minLimiteY;
 	
-	//metodos 
-	void dibujar();
-	virtual void actualizar() = 0 ;
-	void borrar();
-	void setLimite(int x0, int x1, int y0, int y1);
-	void setPosicion(int x, int y);
-	int getAncho();
-	int getAlto();
-	
 	//variables tipo clock
 	clock_t tempo;
 	clock_t paso;
-	
-	//destructor de clase
-	~Vehiculo();
-	
-private:
 };
 
 #endif

@@ -3,24 +3,6 @@
 
 Vehiculo::Vehiculo() {
 	
-	
-	//cargar matriz con el dibujo del auto generico
-	matriz[0][0] = 219;
-	matriz[0][1] = 205;
-	matriz[0][2] = 178;
-	matriz[0][3] = 205;
-	matriz[0][4] = 219;
-	matriz[1][0] = ' ';
-	matriz[1][1] = 47;
-	matriz[1][2] = 219;
-	matriz[1][3] = 92;
-	matriz[1][4] = ' ';
-	matriz[2][0] = 219;
-	matriz[2][1] = 205;
-	matriz[2][2] = 178;
-	matriz[2][3] = 205;
-	matriz[2][4] = 219;
-	
 	//guardamos el ancho y alto de la matriz
 	ancho = 5; 
 	alto = 3; 
@@ -66,12 +48,20 @@ void Vehiculo::setPosicion(int x, int y){
 	this -> y = y;
 }
 
+//getters
 int Vehiculo::getAncho(){
 	return ancho;
 }
 
 int Vehiculo::getAlto(){
 	return alto;
+}
+
+int Vehiculo::getX(){
+	return x;
+}
+int Vehiculo::getY(){
+	return y;
 }
 
 Vehiculo::~Vehiculo() {
