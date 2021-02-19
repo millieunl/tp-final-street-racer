@@ -10,9 +10,10 @@ public:
 	~LotusPoni();
 	
 	void actualizar();
-	void mover();
+	
 	
 private:
+	void mover();
 };
 
 #endif

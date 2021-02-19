@@ -65,6 +65,15 @@ void Vehiculo::setPosicion(int x, int y){
 	this -> x = x;
 	this -> y = y;
 }
+
+int Vehiculo::getAncho(){
+	return ancho;
+}
+
+int Vehiculo::getAlto(){
+	return alto;
+}
+
 Vehiculo::~Vehiculo() {
 	
 }

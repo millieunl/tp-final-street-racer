@@ -6,14 +6,20 @@ class TruenoLoco :public Vehiculo {
 public:
 	TruenoLoco();
 	~TruenoLoco();
-	
-	int direccion = rand()%1;
+
 	void actualizar();
+	
+	
+private:
+	//atributos
+	int direccion;
+	
+	//metodos
 	void moverDiagonalDerecha();
 	void moverDiagonalIzquierda();
 	void mover();
 	
-private:
+	
 };
 
 #endif

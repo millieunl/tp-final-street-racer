@@ -28,6 +28,8 @@ public:
 	void borrar();
 	void setLimite(int x0, int x1, int y0, int y1);
 	void setPosicion(int x, int y);
+	int getAncho();
+	int getAlto();
 	
 	//variables tipo clock
 	clock_t tempo;

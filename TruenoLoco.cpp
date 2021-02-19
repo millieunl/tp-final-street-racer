@@ -6,10 +6,8 @@ TruenoLoco::TruenoLoco() {
 	
 	x =70;
 	y = 3;
-	// elige direccion al azar
-	//0 es hacia la izquierda
-	// 1 hacia la derecha
-	direccion = direccion = rand()% 2;;
+	// elige direccion al azar entre 0 y 1 (0 izq, 1 der)
+	direccion = rand()% 2;
 	tempo = clock();
 	paso = CLOCKS_PER_SEC/10;
 	
@@ -56,14 +54,13 @@ void TruenoLoco::moverDiagonalIzquierda(){
 		x--;
 	}else{
 		borrar();
-		direccion = 1; //cambia direccio hacia derecha
+		direccion = 1; //cambia direccion hacia derecha
 	}
 }
 
 void TruenoLoco:: mover(){
 	
 	if (y + alto < maxLimiteY){
-		
 		if( direccion == 0) moverDiagonalIzquierda();
 		else moverDiagonalDerecha();
 		y++;

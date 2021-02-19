@@ -16,17 +16,23 @@ public:
 
 	Juego();   			//constructor
 	~Juego();  			//destructor
+	
 	void jugar(); 		//esta funcion inicia el juego
-	void eventos();
 	
 	
 	
 private:
 	Jugador *jugador;
 	LotusPoni *lotusPoni;
-	TruenoLoco truenoLoco;
+	TruenoLoco *truenoLoco;
 	Ui *ui;
 	Nivel *nivel;
+	
+	bool chocoTrueno;
+	
+	//metodos
+	void eventos();
+	bool hayColision( int ancho, int alto, int x0, int y0, int x1, int y1);
 	
 };
 
