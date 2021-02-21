@@ -10,6 +10,8 @@
 #include "TruenoLoco.h"
 #include "Vehiculo.h"
 
+#include "Intro.h"
+
 
 class Juego {
 public:
@@ -28,6 +30,7 @@ private:
 	Vehiculo *truenoLoco;
 	Ui *ui;
 	Nivel *nivel;
+	Intro *intro;
 	
 	bool chocoTrueno;
 	bool chocoLotus;
@@ -35,6 +38,8 @@ private:
 	//metodos
 	void eventos();
 	bool hayColision( Vehiculo *v1, Vehiculo *v2);
+	bool esIntro;
+	bool esJuego;;
 	
 };
 

@@ -5,7 +5,7 @@
 Nivel::Nivel() {
 	//inicializamos  las variables para el reloj
 	tempo = clock();
-	paso = CLOCKS_PER_SEC/20;
+	paso = CLOCKS_PER_SEC/30;
 	
 	//inicializamos el valor de ancho y alto  para las barras laterales (pasto)
 	ancho = 29; 
@@ -45,20 +45,11 @@ void Nivel::bordeCarretera(int posx, int posy){
 		std::cout<<" ";
 	}
 }
-//metodo que dibuja linea blanca en medio de la carretera
+//metodo que dibuja  y anima una linea blanca en medio de la carretera
 void Nivel::decoracionCarretera() {
-	for (int i = 5; i < 30; i+=5){
-		gotoxy(57, i-1);
-		textcolor(WHITE);
-		std::cout<<char(219)<<std::endl;
-	}
-	textbackground(BLACK);
-}
-//tetstststs
-void Nivel::lineaMovil(){
 	if(y <3){ //3
 		for (int i = 4; i < 22; i+=3){ //18
-
+			
 			gotoxy(57, y+i);//4
 			textcolor(WHITE);
 			std::cout<<char(219);
@@ -67,7 +58,6 @@ void Nivel::lineaMovil(){
 			textcolor(DARKGRAY);
 			std::cout<<char(219);
 			
-		
 			gotoxy(57, y+i+3);//7
 			textcolor(WHITE);
 			std::cout<<char(219);
@@ -75,29 +65,14 @@ void Nivel::lineaMovil(){
 			gotoxy(57, y+(i+5));
 			textcolor(DARKGRAY);
 			std::cout<<char(219);
-			
-			/*
-			gotoxy(57, y+(i+6));//10
-			textcolor(WHITE);
-			std::cout<<char(219);
-			
-			gotoxy(57, y+(i+8));
-			textcolor(DARKGRAY);
-			std::cout<<char(219);
-			*/
-		
 		}
 		
 		y++;
 	}else {
 		y = 0;
 	}
-	
-	
-	
-	
-	
 }
+
 void Nivel::dibujar(){
 	//dibuja los distintos elementos del nivel (pasto, barras horizontales, borde de la carretera)
 	dibujarPasto(1,3);
@@ -112,9 +87,7 @@ void Nivel::dibujar(){
 void Nivel::actualizar(){
 	//actualiza las lineas de la carretera
 	if( tempo + paso <clock()){
-		//decoracionCarretera();
-		lineaMovil();
-	
+		decoracionCarretera();
 		tempo = clock();
 	}
 }

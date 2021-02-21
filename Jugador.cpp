@@ -20,6 +20,25 @@ Jugador::Jugador() {
 	
 }
 
+
+void Jugador::romperAuto(){
+	//cargar matriz con el modelo del auto 
+	matriz[0][0] = 219;  //rueda
+	matriz[0][1] = 205;
+	matriz[0][2] = 219;
+	matriz[0][3] = 205;
+	matriz[0][4] = 254;   //rueda
+	matriz[1][0] = ' ';
+	matriz[1][1] = ' ';
+	matriz[1][2] = 177;    //cabina
+	matriz[1][3] = ' ';
+	matriz[1][4] = 47;
+	matriz[2][0] = 223;   //rueda
+	matriz[2][1] = 205;
+	matriz[2][2] = 219;
+	matriz[2][3] = 205;
+	matriz[2][4] = 220;  //rueda
+}
 void Jugador::armarAuto(){
 	//cargar matriz con el modelo del auto 
 	matriz[0][0] = 219;
@@ -59,16 +78,18 @@ void Jugador::colorearAuto(){
 	color[2][3] = 0;
 	color[2][4] = 0;    //rueda
 }
+
 void Jugador::actualizar(){
 	if(tempo + paso < clock()) {
 		dibujar();
 		if(estaParpadeando){
 			parpadear();
+			romperAuto();
 		}
 		
 		if(temporizador->tiempocumplido()){
 			estaParpadeando = false;
-			colorearAuto();
+			armarAuto();
 		}
 		tempo = clock();
 	}

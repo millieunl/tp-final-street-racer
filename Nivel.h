@@ -12,15 +12,17 @@ public:
 private:
 	int alto;
 	int ancho;
+	int y;
+	
 	clock_t tempo;
 	clock_t paso;
+	
 	void dibujarPasto(int posx, int posy);
 	void dibujarBarraHorizontal(int posy);
 	void bordeCarretera(int posx, int posy);
 	void decoracionCarretera();
 	
-	void lineaMovil();
-	int y;
+	
 	
 };
 

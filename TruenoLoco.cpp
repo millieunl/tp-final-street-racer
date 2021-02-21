@@ -44,7 +44,7 @@ void TruenoLoco::armarAuto(){
 	//cargar matriz con el dibujo 
 	matriz[0][0] = 219;
 	matriz[0][1] = 205;
-	matriz[0][2] = 178;
+	matriz[0][2] = 178; 
 	matriz[0][3] = 205;
 	matriz[0][4] = 219;
 	matriz[1][0] = ' ';

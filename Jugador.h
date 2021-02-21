@@ -28,6 +28,7 @@ public:
 private:
 	//atributos y objetos de esta clase
 	bool estaParpadeando;
+	void romperAuto();
 	
 	Temporizador *temporizador;
 	

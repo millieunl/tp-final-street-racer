@@ -33,6 +33,11 @@ Juego::Juego() {
 	chocoLotus = false;
 	chocoLotusTrueno =  false;
 	
+	intro = new Intro();
+	
+	esIntro = true;
+	esJuego = false;
+	
 }
 
 //destructor de clase
@@ -75,8 +80,17 @@ bool Juego::hayColision(Vehiculo *v1, Vehiculo *v2){
 
 
 void Juego::jugar(){
+	textbackground(BLACK);
+	clrscr();
+	intro->actualizar();
+	textbackground(DARKGRAY);
+	clrscr();
+	nivel->dibujar();
+
 	
-	while(true){
+	while(true){  //antes era while true
+		
+		
 		//actualizamos
 		ui->actualizar();
 		nivel->actualizar();
@@ -119,5 +133,4 @@ void Juego::jugar(){
 		}
 	}
 		
-
 }
