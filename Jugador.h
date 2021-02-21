@@ -9,21 +9,35 @@ public:
 	Jugador();
 	~Jugador();
 	
+	
 	void actualizar();
 	void mover(){};
-	void armarAuto();
 	void moverIzquierda();
 	void moverDerecha();
     void moverDiagonalDerecha(){};
 	void moverDiagonalIzquierda(){};
 	void chocar();
+	int getVueltas(){};
+	void acelerar(){};
+	
+
 	
 	
+
+
 private:
+	//atributos y objetos de esta clase
+	bool estaParpadeando;
+	
+	Temporizador *temporizador;
+	
+	//metodos propios de esta clase
 	void colorearAuto();
 	void parpadear();
-	bool estaParpadeando;
-	Temporizador *temporizador;
+	
+	//metodos heredados
+	void armarAuto();
+	
 };
 
 #endif

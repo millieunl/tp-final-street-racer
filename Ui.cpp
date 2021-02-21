@@ -8,6 +8,7 @@ Ui::Ui() {
 	
 	//inicializa el valor de puntos
 	puntaje = 0;
+	vidas = 0;
 	
 }
 
@@ -24,13 +25,26 @@ int Ui::getPuntaje() {
 }
 
 void Ui::mostrarPuntaje() {
-	gotoxy(55,1);
+	gotoxy(35,1);
 	textbackground(BLACK);
 	textcolor(WHITE);
-	std::cout<<"puntaje: "<<getPuntaje()<<std::endl;
+	std::cout<<"puntaje: "<<puntaje<<std::endl;
 }
 
+void Ui::mostrarVidas(){
+	gotoxy(70,1);
+	textbackground(BLACK);
+	textcolor(WHITE);
+	std::cout<<"Vidas: "<<vidas<<std::endl;
+}
 
+void Ui::setVidas(int vidas){
+	this -> vidas = vidas;
+}
+
+int Ui::getVidas(){
+	return vidas;
+}
 void Ui::dibujar(){
 	//ver si mostrar puntaje va a aca y ponemos esa funcion privada despues
 }
@@ -38,6 +52,7 @@ void Ui::dibujar(){
 void Ui::actualizar() {
 	if(tempo + paso < clock()) {
 		mostrarPuntaje();
+		mostrarVidas();
 		tempo = clock();
 	}
 	

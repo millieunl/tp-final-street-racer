@@ -1,17 +1,34 @@
 #include "LotusPoni.h"
-
+#include <conio2.h>
 
 LotusPoni::LotusPoni() {
 	//posiciona el auto del enemigo en una posicion fija en "Y" pero random en "X"
 	x = minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) );
 	y = 3;
 
+	velocidad = 4;
 	tempo = clock();
-	paso = CLOCKS_PER_SEC/5;
+	paso = CLOCKS_PER_SEC/velocidad;
 	
 	////dibujo del auto LotusPoni
 	armarAuto();
+	
+	//
+	contadorVueltas = 0;
+	contadorAceleraciones = 0;
 
+}
+
+void LotusPoni::acelerar(){
+	if(contadorVueltas== contadorAceleraciones)  return;
+	contadorAceleraciones=contadorVueltas;
+	velocidad += 2;
+	paso = CLOCKS_PER_SEC/velocidad;
+	
+	gotoxy(1,3);
+	std::cout<<"acelera Poni  " <<velocidad;
+	
+	
 }
 void LotusPoni::armarAuto(){
 	//matriz que carga el diseño del auto
@@ -66,7 +83,7 @@ void LotusPoni:: mover(){
 		y++;;
 	}else {
 		reiniciarLotus();
-		
+		contadorVueltas+=1;
 	}
 	
 }
@@ -75,6 +92,11 @@ void LotusPoni:: mover(){
 void LotusPoni::chocar(){
 	reiniciarLotus();
 }
+
+int LotusPoni::getVueltas(){
+	return contadorVueltas;
+}
+
 LotusPoni::~LotusPoni() {
 	
 }

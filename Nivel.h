@@ -18,6 +18,10 @@ private:
 	void dibujarBarraHorizontal(int posy);
 	void bordeCarretera(int posx, int posy);
 	void decoracionCarretera();
+	
+	void lineaMovil();
+	int y;
+	
 };
 
 #endif

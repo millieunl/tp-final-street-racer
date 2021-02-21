@@ -12,6 +12,8 @@ Vehiculo::Vehiculo() {
 	minLimiteX = 31;
 	maxLimiteY = 27;
 	minLimiteY = 1;
+	
+	
 }
 
 void Vehiculo::dibujar(){
@@ -43,6 +45,7 @@ void Vehiculo::setLimite(int x0, int x1, int y0, int y1){
 }
 
 
+//ver si se esta usando
 void Vehiculo::setPosicion(int x, int y){
 	this -> x = x;
 	this -> y = y;
@@ -63,6 +66,11 @@ int Vehiculo::getX(){
 int Vehiculo::getY(){
 	return y;
 }
+
+int Vehiculo::getVidas(){
+	return vidas;
+}
+
 
 Vehiculo::~Vehiculo() {
 	

@@ -8,20 +8,41 @@ public:
 	TruenoLoco();
 	~TruenoLoco();
 
+	//metodos que se heredan de vehiculos para definir en esta clase sus comportamientos
 	void actualizar();
-	//metodos
-	void armarAuto();
-	void moverDerecha(){};
-	void moverIzquierda(){};
 	void moverDiagonalDerecha();
 	void moverDiagonalIzquierda();
 	void mover();
 	void chocar();
+	int getVueltas();
+	void acelerar();
+	
+	
+	void moverDerecha(){};
+	void moverIzquierda(){};
+
+
 	
 private:
-	//atributos
+	//atributos propios de esta clase
 	int direccion;
+	int contadorVueltas;
+	int contadorInicial;
+	
+	//metodos propios de esta clase
 	void reiniciarTrueno();
+	
+	
+	//metodos heredados de vehiculo como protected y redefinidos aqui 
+	void armarAuto();
+
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

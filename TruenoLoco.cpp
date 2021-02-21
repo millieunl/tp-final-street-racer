@@ -1,4 +1,6 @@
 #include "TruenoLoco.h"
+#include <conio2.h>
+
 
 TruenoLoco::TruenoLoco() {
 	//posiciona el auto del enemigo en una posicion fija en "Y" pero random en "X"
@@ -6,15 +8,38 @@ TruenoLoco::TruenoLoco() {
 	
 	x =70;
 	y = 3;
+	
+	//seteamos en el contructor la velocidad inicial para Trueno Loco
+	velocidad = 3;
+	
 	// elige direccion al azar entre 0 y 1 (0 izq, 1 der)
 	direccion = rand()% 2;
 	tempo = clock();
-	paso = CLOCKS_PER_SEC/10;
+	paso = CLOCKS_PER_SEC/velocidad;
 	
 	
 	//dibujo del auto Trueno Loco
 	armarAuto();
+	
+	//
+	contadorVueltas = 0;
+	contadorInicial = 0;
+	
 }
+
+
+
+void TruenoLoco::acelerar(){
+	
+	if(contadorInicial == contadorVueltas)return;
+	contadorInicial=contadorVueltas;
+	velocidad += 2;
+	paso = CLOCKS_PER_SEC/velocidad;
+	
+	gotoxy(1,2);
+	std::cout<<"acelera TRUENO  " <<velocidad;
+}
+
 void TruenoLoco::armarAuto(){
 	//cargar matriz con el dibujo 
 	matriz[0][0] = 219;
@@ -93,6 +118,7 @@ void TruenoLoco:: mover(){
 		y++;
 	}else{
 		reiniciarTrueno();
+		contadorVueltas+=1;
 	}
 	
 	
@@ -100,6 +126,9 @@ void TruenoLoco:: mover(){
 //cuando el auto choca se reinicia a su posicion inicial
 void TruenoLoco::chocar(){
 	reiniciarTrueno();
+}
+int TruenoLoco::getVueltas(){
+	return contadorVueltas;
 }
 TruenoLoco::~TruenoLoco() {
 	

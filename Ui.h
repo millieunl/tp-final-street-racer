@@ -12,12 +12,18 @@ public:
 	void dibujar();
 	void setPuntaje(int puntaje);
 	int getPuntaje();
-	void mostrarPuntaje();
+	
+	void setVidas(int vida);
+	int getVidas();
 	
 private:
 	clock_t tempo;
 	clock_t paso;
 	int puntaje;
+	int vidas;
+	
+	void mostrarPuntaje();
+	void mostrarVidas();
 };
 
 #endif

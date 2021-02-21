@@ -5,17 +5,23 @@ Jugador::Jugador() {
 	tempo = clock();
 	paso = CLOCKS_PER_SEC/60;
 	
+	//instancia el objeto temporizador
 	temporizador = new Temporizador();
+	
+	//setea la boleana para el efecto de parpadeo en false
 	estaParpadeando = false;
 	x = y = 1;
 	
-	//dibujo del auto del Jugador
+	//dibujo del auto armado del Jugador
 	armarAuto();
+	
+	//define la cantidad de vidas iniciales del jugador
+	vidas = 3;
 	
 }
 
 void Jugador::armarAuto(){
-	//cargar matriz con el dibujo del auto 
+	//cargar matriz con el modelo del auto 
 	matriz[0][0] = 219;
 	matriz[0][1] = 205;
 	matriz[0][2] = 178;
@@ -32,7 +38,7 @@ void Jugador::armarAuto(){
 	matriz[2][3] = 205;
 	matriz[2][4] = 219;
 	
-	//carga la matriz con los colores del auto del jugador
+	//carga la matriz para colorear el auto del jugador
 	colorearAuto();
 }
 void Jugador::colorearAuto(){
@@ -65,9 +71,7 @@ void Jugador::actualizar(){
 			colorearAuto();
 		}
 		tempo = clock();
-		
 	}
-	
 }
 
 
@@ -96,7 +100,7 @@ void Jugador:: chocar(){
 	borrar();
 	temporizador->iniciar(1000);
 	estaParpadeando = true;
-	
+	vidas--;
 }
 
 Jugador::~Jugador() {

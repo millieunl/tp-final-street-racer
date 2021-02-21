@@ -6,27 +6,33 @@
 
 #include <time.h>
 
-//contructor
+//contructor de la clase
 Juego::Juego() {
+	//iniciamos la semilla para random
+	srand (time(NULL)); 
 	
-	srand (time(NULL));
-	//inicia una instancia en memoria dinamica para el objeto auto
+	//para fixear el color de fondo
 	textbackground(DARKGRAY);
 	clrscr();
-	jugador = new Jugador();
-	lotusPoni = new LotusPoni();
-	truenoLoco = new TruenoLoco();
-	ui = new Ui();
-	nivel = new Nivel();
 	
-	//setea la posicion inicial del auto del jugador
+	//instanciamos objetos y seteamos valores, inicializamos boleanas
+	jugador = new Jugador();
 	jugador->setPosicion(31,23);  //x = 31 y = 23
 	
-	//dibuja el nivel una sola vez
+	lotusPoni = new LotusPoni();
+	truenoLoco = new TruenoLoco();
+	
+	ui = new Ui();
+	ui->setVidas(jugador->getVidas());
+	
+	nivel = new Nivel();
 	nivel->dibujar();
 	
+	//inicializamos variables booleanas
 	chocoTrueno = false;
 	chocoLotus = false;
+	chocoLotusTrueno =  false;
+	
 }
 
 //destructor de clase
@@ -40,7 +46,7 @@ Juego::~Juego() {
 
 void Juego::eventos(){
 	if (kbhit()){
-		int tecla = getch();
+		int tecla = getch(); //captura la tecla que se presiona
 		switch(tecla) {
 		case 67:
 		case 77://derecha
@@ -68,30 +74,48 @@ bool Juego::hayColision(Vehiculo *v1, Vehiculo *v2){
 }
 
 
-
 void Juego::jugar(){
+	
 	while(true){
+		//actualizamos
 		ui->actualizar();
 		nivel->actualizar();
-		eventos();
 		jugador->actualizar();
 		lotusPoni->actualizar();
 		truenoLoco->actualizar();
 		
+		//eventos para el teclado
+		eventos();
+		
+		//para mostrar el puntaje y las vidas con la ui
+		ui->setPuntaje(lotusPoni->getVueltas() + truenoLoco->getVueltas());
+		ui->setVidas(jugador->getVidas());
+		
+		//si el puntaje alcanza multiplos de 20 aceleran los enemigos
+		if((ui->getPuntaje() %10 == 0) && (ui->getPuntaje() != 0)){
+			truenoLoco->acelerar();
+			lotusPoni->acelerar();
+		}
+	
 		//deteccion de colision entre autos
 		chocoTrueno = hayColision(jugador,truenoLoco);
 		chocoLotus = hayColision(jugador,lotusPoni);
+		chocoLotusTrueno = hayColision(truenoLoco,lotusPoni);
 		
-		//si hay choque con algun auto
-		//choque con el enemigo truenoLoco
+		//choque jugador-truenoLoco
 		if(chocoTrueno){
 			truenoLoco->chocar();
 			jugador->chocar();
 		}
-		//choque con el enemigo LotusPoni
+		//choque jugador-LotusPoni
 		if(chocoLotus){
 			lotusPoni->chocar();
 			jugador->chocar();
+		}
+		//choque truenoLoco-lotusPoni
+		if(chocoLotusTrueno){
+			lotusPoni->chocar();
+			truenoLoco->chocar();
 		}
 	}
 		

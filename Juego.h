@@ -31,7 +31,7 @@ private:
 	
 	bool chocoTrueno;
 	bool chocoLotus;
-	
+	bool chocoLotusTrueno;
 	//metodos
 	void eventos();
 	bool hayColision( Vehiculo *v1, Vehiculo *v2);
