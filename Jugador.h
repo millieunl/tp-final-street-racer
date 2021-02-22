@@ -17,9 +17,9 @@ public:
     void moverDiagonalDerecha(){};
 	void moverDiagonalIzquierda(){};
 	void chocar();
-	int getVueltas(){};
+	int getVueltas(){return 0;};
 	void acelerar(){};
-	
+	void reset();
 
 	
 	

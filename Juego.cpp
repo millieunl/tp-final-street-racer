@@ -1,11 +1,11 @@
 #include "Juego.h"
+#include "Jugador.h"
+#include "LotusPoni.h"
+#include "TruenoLoco.h"
 #include <conio2.h>
 #include <stdlib.h>
-
-
-
 #include <time.h>
-
+#include <Windows.h>
 //contructor de la clase
 Juego::Juego() {
 	//iniciamos la semilla para random
@@ -28,10 +28,6 @@ Juego::Juego() {
 	nivel = new Nivel();
 	nivel->dibujar();
 	
-	//inicializamos variables booleanas
-	chocoTrueno = false;
-	chocoLotus = false;
-	chocoLotusTrueno =  false;
 	
 	intro = new Intro();
 	outro = new Outro();
@@ -80,67 +76,102 @@ bool Juego::hayColision(Vehiculo *v1, Vehiculo *v2){
 }
 
 
-void Juego::jugar(){
-	//esta es la pantalla de la introduccion
+void Juego::lanzarIntro(){
 	textbackground(BLACK);
 	clrscr();
-	//intro->actualizar();
-	outro->actualizar();
+	intro->actualizar();
 	textbackground(DARKGRAY);
 	clrscr();
-	nivel->dibujar();
-
-	//bucle del juego
-	while(true){  
-		//actualizamos
-		ui->actualizar();
-		nivel->actualizar();
-		jugador->actualizar();
-		lotusPoni->actualizar();
-		truenoLoco->actualizar();
-		
-		//eventos para el teclado
-		eventos();
-		
-		//para mostrar el puntaje y las vidas con la ui
-		ui->setPuntaje(lotusPoni->getVueltas() + truenoLoco->getVueltas());
-		ui->setVidas(jugador->getVidas());
-		
-		//si el puntaje alcanza multiplos de 20 aceleran los enemigos
-		if((ui->getPuntaje() %10 == 0) && (ui->getPuntaje() != 0)){
-			truenoLoco->acelerar();
-			lotusPoni->acelerar();
-		}
-	
-		//deteccion de colision entre autos
-		chocoTrueno = hayColision(jugador,truenoLoco);
-		chocoLotus = hayColision(jugador,lotusPoni);
-		chocoLotusTrueno = hayColision(truenoLoco,lotusPoni);
-		
-		//choque jugador-truenoLoco
-		if(chocoTrueno){
-			truenoLoco->chocar();
-			jugador->chocar();
-		}
-		//choque jugador-LotusPoni
-		if(chocoLotus){
-			lotusPoni->chocar();
-			jugador->chocar();
-		}
-		//choque truenoLoco-lotusPoni
-		if(chocoLotusTrueno){
-			lotusPoni->chocar();
-			truenoLoco->chocar();
-		}
-		
-		if(jugador->getVidas() == 0){
-			//sale del juego
-			break;
-		}
-	}// fin while
+}
+ void Juego::lanzarOutro(){
 	textbackground(BLACK);
 	clrscr();
+	outro->setPuntaje(ui->getPuntaje());
 	outro->actualizar();
-	
-		
+	textbackground(BLACK);
+	clrscr();
 }
+
+void Juego:: reiniciar(){
+	//reinicia todos los parametros para el juego
+	jugador->reset();
+	lotusPoni->reset();
+	truenoLoco->reset();
+	outro->reset();
+}
+
+void Juego::detectarColision(){
+	
+	//choque jugador-truenoLoco
+	if(hayColision(jugador,truenoLoco)){
+		truenoLoco->chocar();
+		jugador->chocar();
+	}
+	//choque jugador-LotusPoni
+	if(hayColision(jugador,lotusPoni)){
+		lotusPoni->chocar();
+		jugador->chocar();
+	}
+	//choque truenoLoco-lotusPoni
+	if(hayColision(truenoLoco,lotusPoni)){
+		lotusPoni->chocar();
+		truenoLoco->chocar();
+	}
+}
+void Juego::jugar(){
+	while(true){ //mientras no quiera salir del juego
+		
+		//lanza la pantalla de introduccion del juego		
+		lanzarIntro();
+		
+		//dibuja el escenario del juego
+		nivel->dibujar();	
+		
+		//comienza el bucle del juego
+		while(jugador->getVidas() > 0){  //mientras tenga vida
+			
+			//actualizamos
+			ui->actualizar();
+			nivel->actualizar();
+			jugador->actualizar();
+			lotusPoni->actualizar();
+			truenoLoco->actualizar();
+			
+			//eventos para el teclado
+			eventos();
+			
+			//para mostrar el puntaje y las vidas con la ui
+			ui->setPuntaje(lotusPoni->getVueltas() + truenoLoco->getVueltas());
+			ui->setVidas(jugador->getVidas());
+			
+			//si el puntaje alcanza multiplos de 20 aceleran los enemigos
+			if((ui->getPuntaje() %20 == 0) && (ui->getPuntaje() != 0)){
+				truenoLoco->acelerar();
+				lotusPoni->acelerar();
+			}	
+			//detecta colisiones y muestra el choque
+			detectarColision();
+			
+			//cuando no hay mas vidas y que no vaya abrutmanete a la pantalla de game over
+			if(jugador->getVidas() == 0) { 
+				ui->setVidas(0);
+				ui->dibujar();
+				Sleep(1000);
+			}
+		}// fin while anidado
+		
+		//lanza la pantalla de game over
+		lanzarOutro();
+		
+		// decide si salir del  bucle del juego o no
+		if(outro->getQuiereSalir()){
+			//se va del bucle y termina el juego
+			break; 
+		}else{
+			//reiniciar todos los parametros para volver a jugar
+			reiniciar(); 
+		}
+	}//fin while principal	
+	
+}
+

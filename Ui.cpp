@@ -27,6 +27,10 @@ int Ui::getPuntaje() {
 void Ui::mostrarPuntaje() {
 	gotoxy(35,1);
 	textbackground(BLACK);
+	textcolor(BLACK);
+	std::cout<<"                  "; //Fix para que limpie el renglon
+	gotoxy(35,1);
+	textbackground(BLACK);
 	textcolor(WHITE);
 	std::cout<<"puntaje: "<<puntaje<<std::endl;
 }
@@ -47,6 +51,8 @@ int Ui::getVidas(){
 }
 void Ui::dibujar(){
 	//ver si mostrar puntaje va a aca y ponemos esa funcion privada despues
+	mostrarPuntaje();
+	mostrarVidas();
 }
 
 void Ui::actualizar() {
@@ -55,6 +61,5 @@ void Ui::actualizar() {
 		mostrarVidas();
 		tempo = clock();
 	}
-	
 }
 

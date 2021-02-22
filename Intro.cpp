@@ -70,22 +70,16 @@ void Intro::mostraReglas(){
 	gotoxy(10,26);
 	std::cout<< "Estas preparado/a para comenzar? ----> Presiona ENTER CUANDO ESTES LISTO/A <----"<<std::endl;
 	//boton 
-	gotoxy(39,27);
+	gotoxy(47,27);
 	textcolor(YELLOW);
 	std::cout<< "-------------------"<<std::endl;
-	gotoxy(40,28);
+	gotoxy(48,28);
 	textcolor(LIGHTMAGENTA);
 	std::cout<< "SI ESTOY LISTO/A!"<<std::endl;
-	gotoxy(39,29);
+	gotoxy(47,29);
 	textcolor(YELLOW);
 	std::cout<< "-------------------"<<std::endl;
 	
-	/*
-	gotoxy(10,28);
-	textcolor(WHITE);
-	std::cout<< "NO ESTOY LISTO/A TODAVIA"<<std::endl;
-	gotoxy(50,28);
-	std::cout<< "SI ESTOY LISTO/A!"<<std::endl;*/
 }
 
 void  Intro::actualizar(){
@@ -101,66 +95,6 @@ bool Intro::eventos(){
 		if(tecla == 13){
 			return true;
 		}
-		/*
-		switch(tecla) {
-		case 67:
-		case 77://derecha :SI ESTOY LISTA
-			//resalta texto derecha, si estoy listo y pone borde de seleccion
-			gotoxy(49,27);
-			textcolor(YELLOW);
-			std::cout<< "-------------------"<<std::endl;
-			gotoxy(50,28);
-			textcolor(LIGHTMAGENTA);
-			std::cout<< "SI ESTOY LISTO/A!"<<std::endl;
-			gotoxy(49,29);
-			textcolor(YELLOW);
-			std::cout<< "-------------------"<<std::endl;
-			
-			//saca de foco la opcion no estoy listo
-			gotoxy(9,27);
-			textcolor(YELLOW);
-			std::cout<< "                                "<<std::endl;
-			gotoxy(10,28);
-			textcolor(LIGHTGRAY);
-			std::cout<< "NO ESTOY LISTO/A TODAVIA"<<std::endl;
-			gotoxy(9,29);
-			textcolor(YELLOW);
-			std::cout<< "                                    "<<std::endl;
-			break;
-			//return false;
-		
-		case 68:
-		case 75://izquierda
-			//resalta texto izquierda
-			gotoxy(9,27);
-			textcolor(YELLOW);
-			std::cout<< "----------------------------"<<std::endl;
-			gotoxy(10,28);
-			textcolor(LIGHTMAGENTA);
-			std::cout<< "NO ESTOY LISTO/A TODAVIA"<<std::endl;
-			gotoxy(9,29);
-			textcolor(YELLOW);
-			std::cout<< "----------------------------"<<std::endl;
-			
-			gotoxy(49,27);
-			textcolor(YELLOW);
-			std::cout<< "                               "<<std::endl;
-			gotoxy(50,28);
-			textcolor(LIGHTGRAY);
-			std::cout<< "SI ESTOY LISTO/A!"<<std::endl;
-			gotoxy(49,29);
-			textcolor(YELLOW);
-			std::cout<< "                                 "<<std::endl;
-			break;
-			//return false;
-			
-		case 13:
-			return true;
-			
-			break;
-		}
-		*/
-		
 	} //fin
 	return false;
 }

@@ -3,8 +3,7 @@
 #include<iostream>
 
 Outro::Outro() {
-	x = 0;
-	quiereSalir=false;
+	reset();
 }
 
 Outro::~Outro() {
@@ -13,12 +12,18 @@ Outro::~Outro() {
 
 void Outro::actualizar(){
 	mostrarMenu();
-	while(true){
-		mostrarMensaje();
-		if(eventos())break;
+	while(capturando){
+		mostrarMensaje();  //informa que se perdio el juego
+		eventos();
 	}
 }
+void Outro::setPuntaje(int puntaje){
+	this ->puntaje = puntaje;
+}
 
+bool Outro::getQuiereSalir(){
+	return quiereSalir;
+}
 void Outro::mostrarMensaje(){
 	//titulo con el nombre del juego
 	textcolor(LIGHTGREEN);
@@ -35,6 +40,9 @@ void Outro::mostrarMensaje(){
 	gotoxy(30,10);
 	std::cout<<"<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>";
 	
+	
+	gotoxy(30,12);
+	std::cout<<"Has obtenido "<<puntaje<<" puntos en esta carrera!!";
 	//marquesina de color
 	for (int i = 0;i<100;i++){
 		textcolor(rand()%6 +10);
@@ -71,13 +79,12 @@ void Outro::mostrarMenu(){
 
 bool Outro::eventos(){
 	if (kbhit()){
+		clrscr();
+		mostrarMenu();
 		int tecla = getch(); //captura la tecla que se presiona
-		
-		switch(tecla) {
+		switch(tecla){
 		case 67:
-		case 77://derecha : NO VUELVE A JUGAR
-			x = 65;
-			quiereSalir = true;
+		case 77:
 			//resalta texto izquierda
 			gotoxy(65,22);
 			textcolor(YELLOW);
@@ -96,13 +103,11 @@ bool Outro::eventos(){
 			std::cout<< "QUIERO JUGAR DE NUEVO!"<<std::endl;
 			gotoxy(18,24);
 			std::cout<< "                                "<<std::endl;
+			quiereSalir = true;
 			break;
 			//return false;
-			
 		case 68:
-		case 75://izquierda VULEVE A JUGAR
-			x = 18;
-			quiereSalir = false;
+		case 75://iz
 			//resalta texto derecha, si estoy listo y pone borde de seleccion
 			gotoxy(18,22);
 			textcolor(YELLOW);
@@ -122,18 +127,19 @@ bool Outro::eventos(){
 			std::cout<< "DESEO SALIR DEL JUEGO "<<std::endl;
 			gotoxy(65,24);
 			std::cout<< "                                    "<<std::endl;
+			quiereSalir = false;  
 			break;
-			//return false;
-			
 			
 		case 13:
-			if(!quiereSalir) return true;
-			//if(!quiereSalir) break;
-			//if(x == 18) return true; //quiere volver a jugar
-			//else break;
+			capturando = false;
+			break;
 		}
-		
-		
-	} //fin
-	return false;
+	}		
+return false;
+}
+void Outro::reset(){
+	x = 0;
+	puntaje = 0;
+	quiereSalir = false;	
+	capturando = true;
 }

@@ -20,7 +20,7 @@ public:
 	
 	void moverDerecha(){};
 	void moverIzquierda(){};
-
+	void reset();
 
 	
 private:

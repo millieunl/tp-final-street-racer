@@ -2,42 +2,19 @@
 #include <conio2.h>
 
 
-TruenoLoco::TruenoLoco() {
-	//posiciona el auto del enemigo en una posicion fija en "Y" pero random en "X"
-	x = minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) );
-	
-	x =70;
-	y = 3;
-	
-	//seteamos en el contructor la velocidad inicial para Trueno Loco
-	velocidad = 3;
-	
-	// elige direccion al azar entre 0 y 1 (0 izq, 1 der)
-	direccion = rand()% 2;
-	tempo = clock();
-	paso = CLOCKS_PER_SEC/velocidad;
-	
-	
+TruenoLoco::TruenoLoco() {	
 	//dibujo del auto Trueno Loco
 	armarAuto();
-	
-	//
-	contadorVueltas = 0;
-	contadorInicial = 0;
-	
+	reset();	
 }
 
 
 
 void TruenoLoco::acelerar(){
-	
 	if(contadorInicial == contadorVueltas)return;
 	contadorInicial=contadorVueltas;
 	velocidad += 2;
 	paso = CLOCKS_PER_SEC/velocidad;
-	
-	gotoxy(1,2);
-	std::cout<<"acelera TRUENO  " <<velocidad;
 }
 
 void TruenoLoco::armarAuto(){
@@ -76,7 +53,6 @@ void TruenoLoco::armarAuto(){
 	color[2][4] = 0;    //rueda es negra
 }
 void TruenoLoco::actualizar(){
-	
 	if(tempo + paso < clock()) {
 		mover();
 		dibujar();
@@ -96,7 +72,7 @@ void TruenoLoco::moverDiagonalDerecha(){
 		x++;
 	}else{
 		borrar();
-		direccion = 0; //cambia direccio hacia izquierda
+		direccion = 0; // 0 cambia direccio hacia izquierda
 	}
 }
 
@@ -106,7 +82,7 @@ void TruenoLoco::moverDiagonalIzquierda(){
 		x--;
 	}else{
 		borrar();
-		direccion = 1; //cambia direccion hacia derecha
+		direccion = 1; //1 cambia direccion hacia derecha
 	}
 }
 
@@ -134,3 +110,18 @@ TruenoLoco::~TruenoLoco() {
 	
 }
 
+void TruenoLoco::reset(){
+	x = minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) );
+	y = 3;
+	
+	//seteamos en el contructor la velocidad inicial para Trueno Loco
+	velocidad = 3;
+	
+	// elige direccion al azar entre 0 y 1 (0 izq, 1 der)
+	direccion = rand()% 2;
+	tempo = clock();
+	paso = CLOCKS_PER_SEC/velocidad;
+	contadorVueltas = 0;
+	contadorInicial = 0;
+	
+}

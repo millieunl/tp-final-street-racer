@@ -5,11 +5,7 @@
 
 #include "Ui.h"
 #include "Nivel.h"
-#include "Jugador.h"
-#include "LotusPoni.h"
-#include "TruenoLoco.h"
 #include "Vehiculo.h"
-
 #include "Intro.h"
 #include "Outro.h"
 
@@ -36,13 +32,14 @@ private:
 	Intro *intro;
 	Outro *outro;
 	
-	bool chocoTrueno;
-	bool chocoLotus;
-	bool chocoLotusTrueno;
-	
 	//metodos
 	void eventos();
 	bool hayColision( Vehiculo *v1, Vehiculo *v2);
+	void detectarColision();
+	void lanzarIntro();
+	void lanzarOutro();
+	void reiniciar();
+	
 	
 	
 };

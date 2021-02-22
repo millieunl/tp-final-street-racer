@@ -21,7 +21,7 @@ public:
 	virtual void chocar() = 0;
 	virtual int getVueltas() = 0;
 	virtual void acelerar() = 0;
-	
+	virtual void reset() = 0;
 	
 	
 	//metodos que se implementan en esta misma clase y se heredan directamente(herencia simple) en las derivadas

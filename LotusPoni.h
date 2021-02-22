@@ -19,7 +19,7 @@ public:
 	void chocar();
 	int getVueltas();
 	void acelerar();
-
+	void reset();
 
 private:
 	void reiniciarLotus();

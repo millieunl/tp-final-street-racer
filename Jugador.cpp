@@ -126,6 +126,13 @@ void Jugador:: chocar(){
 
 Jugador::~Jugador() {
 	delete temporizador;
-	
 }
 
+void Jugador::reset(){
+	tempo = clock();
+	paso = CLOCKS_PER_SEC/60;
+	vidas = 3;
+	estaParpadeando = false;
+	x = 31;
+	y = 23;
+}
