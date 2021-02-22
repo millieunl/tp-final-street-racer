@@ -11,6 +11,8 @@
 #include "Vehiculo.h"
 
 #include "Intro.h"
+#include "Outro.h"
+
 
 
 class Juego {
@@ -24,22 +26,24 @@ public:
 	
 	
 private:
-	//Jugador *jugador;
+	//atributos
+	//objetos
 	Vehiculo *jugador;
 	Vehiculo *lotusPoni;
 	Vehiculo *truenoLoco;
 	Ui *ui;
 	Nivel *nivel;
 	Intro *intro;
+	Outro *outro;
 	
 	bool chocoTrueno;
 	bool chocoLotus;
 	bool chocoLotusTrueno;
+	
 	//metodos
 	void eventos();
 	bool hayColision( Vehiculo *v1, Vehiculo *v2);
-	bool esIntro;
-	bool esJuego;;
+	
 	
 };
 

@@ -34,19 +34,20 @@ Juego::Juego() {
 	chocoLotusTrueno =  false;
 	
 	intro = new Intro();
+	outro = new Outro();
 	
-	esIntro = true;
-	esJuego = false;
 	
 }
 
 //destructor de clase
 Juego::~Juego() {
+	delete intro;
 	delete jugador;
 	delete lotusPoni;
 	delete truenoLoco;
 	delete ui;
 	delete nivel;
+	delete outro;
 }
 
 void Juego::eventos(){
@@ -80,17 +81,17 @@ bool Juego::hayColision(Vehiculo *v1, Vehiculo *v2){
 
 
 void Juego::jugar(){
+	//esta es la pantalla de la introduccion
 	textbackground(BLACK);
 	clrscr();
-	intro->actualizar();
+	//intro->actualizar();
+	outro->actualizar();
 	textbackground(DARKGRAY);
 	clrscr();
 	nivel->dibujar();
 
-	
-	while(true){  //antes era while true
-		
-		
+	//bucle del juego
+	while(true){  
 		//actualizamos
 		ui->actualizar();
 		nivel->actualizar();
@@ -131,6 +132,15 @@ void Juego::jugar(){
 			lotusPoni->chocar();
 			truenoLoco->chocar();
 		}
-	}
+		
+		if(jugador->getVidas() == 0){
+			//sale del juego
+			break;
+		}
+	}// fin while
+	textbackground(BLACK);
+	clrscr();
+	outro->actualizar();
+	
 		
 }

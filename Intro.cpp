@@ -11,35 +11,39 @@ Intro::~Intro() {
 }
 
 void Intro::mostraReglas(){
-	
+	//titulo con el nombre del juego
 	textcolor(LIGHTGREEN);
 	gotoxy(25,3);
-	std::cout<<"<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>";
+	std::cout<<"<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>";
 	gotoxy(25,4);
-	std::cout<<"<<  __   __   ___  ___  __     __        __   ___  __     >>"<<std::endl;
-	gotoxy(25,5);
-	std::cout<<"<< /__` |__) |__  |__  |  "<<char(92)<<"   |__)  /"<<char(92)<<"  /  ` |__  |__)    >>"<<std::endl;
+	std::cout<<"<<   __  ___  __   ___  ___ ___     __        __   ___  __    >>"<<std::endl;
+	gotoxy(25,5);  
+	std::cout<<"<<  /__`  |  |__) |__  |__   |     |__)  /"<<char(92)<<"  /  ` |__  |__)   >>"<<std::endl;
 	gotoxy(25,6);
-	std::cout<<"<<.__/  |    |___ |___ |__/   |  "<<char(92)<<" /~~"<<char(92)<<" "<<char(92)<<"__, |___ |  "<<char(92)<<"    >>"<<std::endl;
+	std::cout<<"<<  .__/  |  |  "<<char(92)<<" |___ |___  |     |  "<<char(92)<<" /~~"<<char(92)<<" "<<char(92)<<"__, |___ |  "<<char(92)<<"   >>"<<std::endl;
 	gotoxy(25,7);
-	std::cout<<"<<                                                        >>";
+	std::cout<<"<<                                                            >>";
 	gotoxy(25,8);
-	std::cout<<"<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>";
+	std::cout<<"<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>";
 	
-	
+	//mensaje de bienvenida
 	textcolor(LIGHTCYAN);
 	gotoxy(18,10);
 	std::cout<<"BIENVENIDO/A A SPEED RACER CORREDOR/A. Comienza esta alocada carrera de autos!"<<std::endl;
 	
+	//marquesina de color
 	for (int i = 0;i<110;i++){
 		textcolor(rand()%6 +10);
 		gotoxy(1+i,12);
 		std::cout<<"*";
 	}
+	
+	//subtitulo
 	textcolor(YELLOW);
 	gotoxy(1,13);
 	std::cout<<char(173)<<"Como se juega?"<<std::endl;
 	
+	//reglas  y gameplay explicadas
 	textcolor(WHITE);
 	gotoxy(1,15);
 	std::cout<<"- * - Tu auto se desplaza hacia los costados con las teclas izquierda y derecha del teclado."<<std::endl;
@@ -50,18 +54,38 @@ void Intro::mostraReglas(){
 	std::cout<<"- * - Para no perder, esquiva los enemigos Trueno Loco y con Lotus Poni y a los obstaculos."<<std::endl;
 	std::cout<<"- * - Esquivalos, "<<std::endl;
 	std::cout<<"- * -"<<char(173)<<"Mas desafiante! Cada 20 puntos los obstaculos y enemigos sorteados obtendran mayor velocidad! "<<std::endl;
+	
+	//marquesina
 	for (int i = 0;i<110;i++){
 		textcolor(rand()%6 +10);
 		gotoxy(1+i,24);
 		std::cout<<"*";
 		
 	}
-	gotoxy(1,25);
-	textcolor(WHITE);
-	std::cout<<"- * -Hace calor, el sol quema el asfalto, puedes sentir los motores en marcha. "<<std::endl;
-	textcolor(LIGHTMAGENTA);
-	std::cout<< "----> Estas preparado/a para comenzar?  Presiona ENTER CUANDO ESTES LISTO/A?<----"<<std::endl;
 	
+	//mensaje para invitar a comenzar el juego
+	gotoxy(10,25);
+	textcolor(LIGHTGREEN);
+	std::cout<<"Hace calor, el sol quema el asfalto, puedes sentir los motores en marcha... "<<std::endl;
+	gotoxy(10,26);
+	std::cout<< "Estas preparado/a para comenzar? ----> Presiona ENTER CUANDO ESTES LISTO/A <----"<<std::endl;
+	//boton 
+	gotoxy(39,27);
+	textcolor(YELLOW);
+	std::cout<< "-------------------"<<std::endl;
+	gotoxy(40,28);
+	textcolor(LIGHTMAGENTA);
+	std::cout<< "SI ESTOY LISTO/A!"<<std::endl;
+	gotoxy(39,29);
+	textcolor(YELLOW);
+	std::cout<< "-------------------"<<std::endl;
+	
+	/*
+	gotoxy(10,28);
+	textcolor(WHITE);
+	std::cout<< "NO ESTOY LISTO/A TODAVIA"<<std::endl;
+	gotoxy(50,28);
+	std::cout<< "SI ESTOY LISTO/A!"<<std::endl;*/
 }
 
 void  Intro::actualizar(){
@@ -71,15 +95,74 @@ void  Intro::actualizar(){
 	}	
 }
 bool Intro::eventos(){
+	
 	if (kbhit()){
 		int tecla = getch(); //captura la tecla que se presiona
 		if(tecla == 13){
 			return true;
-		}else{
-			std::cout<<"otra tecla, no pasa nada"<<std::endl;
-			return false;
 		}
-	}
+		/*
+		switch(tecla) {
+		case 67:
+		case 77://derecha :SI ESTOY LISTA
+			//resalta texto derecha, si estoy listo y pone borde de seleccion
+			gotoxy(49,27);
+			textcolor(YELLOW);
+			std::cout<< "-------------------"<<std::endl;
+			gotoxy(50,28);
+			textcolor(LIGHTMAGENTA);
+			std::cout<< "SI ESTOY LISTO/A!"<<std::endl;
+			gotoxy(49,29);
+			textcolor(YELLOW);
+			std::cout<< "-------------------"<<std::endl;
+			
+			//saca de foco la opcion no estoy listo
+			gotoxy(9,27);
+			textcolor(YELLOW);
+			std::cout<< "                                "<<std::endl;
+			gotoxy(10,28);
+			textcolor(LIGHTGRAY);
+			std::cout<< "NO ESTOY LISTO/A TODAVIA"<<std::endl;
+			gotoxy(9,29);
+			textcolor(YELLOW);
+			std::cout<< "                                    "<<std::endl;
+			break;
+			//return false;
+		
+		case 68:
+		case 75://izquierda
+			//resalta texto izquierda
+			gotoxy(9,27);
+			textcolor(YELLOW);
+			std::cout<< "----------------------------"<<std::endl;
+			gotoxy(10,28);
+			textcolor(LIGHTMAGENTA);
+			std::cout<< "NO ESTOY LISTO/A TODAVIA"<<std::endl;
+			gotoxy(9,29);
+			textcolor(YELLOW);
+			std::cout<< "----------------------------"<<std::endl;
+			
+			gotoxy(49,27);
+			textcolor(YELLOW);
+			std::cout<< "                               "<<std::endl;
+			gotoxy(50,28);
+			textcolor(LIGHTGRAY);
+			std::cout<< "SI ESTOY LISTO/A!"<<std::endl;
+			gotoxy(49,29);
+			textcolor(YELLOW);
+			std::cout<< "                                 "<<std::endl;
+			break;
+			//return false;
+			
+		case 13:
+			return true;
+			
+			break;
+		}
+		*/
+		
+	} //fin
+	return false;
 }
 
 

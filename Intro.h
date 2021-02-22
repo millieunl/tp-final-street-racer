@@ -7,12 +7,16 @@ public:
 	Intro();
 	~Intro();
 	
+	//metodos
 	void actualizar();
-	void mostraReglas();
-	bool eventos();
+	
 	
 	
 private:
+	//metodos
+	void mostraReglas();
+	bool eventos();
+	
 	clock_t tempo;
 	clock_t paso;
 };
