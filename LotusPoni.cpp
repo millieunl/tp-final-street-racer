@@ -55,9 +55,10 @@ void LotusPoni::actualizar(){
 }
 
 //reinicia la posicion de donde sale LotusPoni
-void LotusPoni::reLanzarLotus(){
+void LotusPoni::reLanzar(){
 	borrar();
-	setPosicion(minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) ),3);
+	x = minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ));
+	y = 3;
 }
 
 //se llama en el metodo actualizar, mueve este auto 
@@ -67,7 +68,7 @@ void LotusPoni:: mover(){
 		borrar();
 		y++;;
 	}else {
-		reLanzarLotus();
+		reLanzar();
 		contadorVueltas+=1;
 	}
 	
@@ -76,13 +77,13 @@ void LotusPoni:: mover(){
 //este metodo se llama en la clase Juego, para cuando se detecta un choque entre 
 //LotusPoni y otro vehiculo/obstaculo, sirve para relanzar el auto
 void LotusPoni::chocar(){
-	reLanzarLotus();
+	reLanzar();
 }
 
 //este metodo acelera a LotusPoni y verifica que solo acelere una vez
 void LotusPoni::acelerar(){
-	if(contadorVueltas== contadorAceleraciones)  return;
-	contadorAceleraciones=contadorVueltas;
+	if(contadorVueltas== contadorInicial)  return;
+	contadorInicial=contadorVueltas;
 	velocidad += 2;
 	paso = CLOCKS_PER_SEC/velocidad;
 }
@@ -102,7 +103,7 @@ void LotusPoni::reset(){
 	
 	//inicializa contadores
 	contadorVueltas = 0;
-	contadorAceleraciones = 0;
+	contadorInicial = 0;
 	
 	//inicializa reloj,
 	tempo = clock();

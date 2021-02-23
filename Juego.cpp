@@ -18,12 +18,14 @@ Juego::Juego() {
 	jugador->setPosicion(31,23);  //x = 31 y = 23
 	lotusPoni = new LotusPoni();
 	truenoLoco = new TruenoLoco();
+	obstaculo = new Obstaculo();
 	ui = new Ui();
 	ui->setVidas(jugador->getVidas());
 	nivel = new Nivel();
 	nivel->dibujar();
 	intro = new Intro();
 	outro = new Outro();
+
 }
 
 //destructor
@@ -33,35 +35,16 @@ Juego::~Juego() {
 	delete jugador;
 	delete lotusPoni;
 	delete truenoLoco;
+	delete obstaculo;
 	delete ui;
 	delete nivel;
 	delete outro;
 }
 
-
+//este metodo llama a  los eventos de otras clases
 void Juego::eventos(){
-	
+	//llama al evento que sirven para mover al jugador
 	jugador->mover();
-	
-	/*
-	//if(kbhit()){
-	int tecla = getch(); //captura la tecla que se presiona
-	switch(tecla) {
-	case 67:
-	case 77://derecha
-	//llama funcion para moverse a la derecha
-	//jugador->moverDerecha();
-	jugador->mover();
-	break;
-	case 68:
-	case 75://izquierda
-	//llama funcion para moverse a la izquierda
-	//jugador->moverIzquierda();
-	break;
-	}
-	}
-	*/
-	
 }
 
 
@@ -90,10 +73,14 @@ void Juego:: reiniciar(){
 	jugador->reset();
 	lotusPoni->reset();
 	truenoLoco->reset();
+	obstaculo->reset();
 	outro->reset();
 }
 
-//devuelve true si hay  alguna colision entre dos objetos del tipo vehiculo
+//****************************************************
+//sobrecarga de funciones
+//este metodo recibe dos parametros de tipo vehiculos
+//devuelve true si hay  alguna colision entre dos vehiculos
 bool Juego::hayColision(Vehiculo *v1, Vehiculo *v2){
 	if((v1-> getX() < v2->getX() + v2->getAncho()) &&
 		(v1->getX() + v1->getAncho() > v2->getX()) &&
@@ -104,25 +91,37 @@ bool Juego::hayColision(Vehiculo *v1, Vehiculo *v2){
 		return false;
 }
 
-//Si hay colision entre vehiculos define quien choco con quien y muestra el choque
-void Juego::detectarColision(){
-	//choque jugador-truenoLoco
-	if(hayColision(jugador,truenoLoco)){
-		truenoLoco->chocar();
-		jugador->chocar();
-	}
-	//choque jugador-LotusPoni
-	if(hayColision(jugador,lotusPoni)){
-		lotusPoni->chocar();
-		jugador->chocar();
-	}
-	//choque truenoLoco-lotusPoni
-	if(hayColision(truenoLoco,lotusPoni)){
-		lotusPoni->chocar();
-		truenoLoco->chocar();
+//este metodo recibe dos parametros de tipo= vehiculo y obstaculo
+//devuelve  true si hay colision entre un vehiculo cualquiera y un osbstaculo
+bool Juego::hayColision(Vehiculo *v1, Obstaculo *obs){
+	if((v1-> getX() < obs->getX() + obs->getAncho()) &&
+	(v1->getX() + v1->getAncho() > obs->getX()) &&
+	(v1-> getY() < obs->getY() + obs->getAlto()) &&
+	(v1->getY() + v1->getAlto() > obs->getY())){
+	return true;
+}
+	return false;
+}
+
+//este metodo recibe dos parametros del tipo Vehiculo
+//Si hay colision entre los dos vehiculos y muestra el choque entre ellos
+void Juego::detectarColision(Vehiculo *v1, Vehiculo *v2){
+	if(hayColision(v1,v2)){
+		v1->chocar();
+		v2->chocar();
 	}
 }
 
+//este metodo se usa para detectar colision entre vehiculo y un obstaculo
+//Si hay colision entre vehiculos define quien choco con quien y muestra el choque
+void Juego::detectarColision(Vehiculo *v1, Obstaculo *obs){
+	if(hayColision(v1,obs)){
+		obs->chocar();
+		v1->chocar();
+	}
+}
+
+//**************************************
 //actualiza la escena
 void Juego::actualizar(){
 	ui->actualizar();
@@ -130,6 +129,7 @@ void Juego::actualizar(){
 	jugador->actualizar();
 	lotusPoni->actualizar();
 	truenoLoco->actualizar();
+	obstaculo->actualizar();
 }
 
 //lanza el bucle principal del juego
@@ -151,18 +151,25 @@ void Juego::jugar(){
 			//eventos para el teclado
 			eventos();
 			
-			//para mostrar el puntaje y las vidas con la ui
-			ui->setPuntaje(lotusPoni->getVueltas() + truenoLoco->getVueltas());
+			//setea el puntaje en la UI , con la suma de cada vuelta completada (sin chocar) de los enemigos
+			//sirve para que se pueda mostrar el puntaje y las vidas con la ui
+			ui->setPuntaje(lotusPoni->getVueltas() + truenoLoco->getVueltas() + obstaculo->getVueltas());
 			ui->setVidas(jugador->getVidas());
 			
 			//si el puntaje alcanza multiplos de 20 aceleran los enemigos
 			if((ui->getPuntaje() %20 == 0) && (ui->getPuntaje() != 0)){
 				truenoLoco->acelerar();
 				lotusPoni->acelerar();
+				obstaculo->acelerar();
 			}	
 			
-			//detecta colisiones y muestra el choque
-			detectarColision();
+			//detecta colisiones entre los distintos objetos y muestra el choque
+			detectarColision(jugador,truenoLoco);
+			detectarColision(jugador,lotusPoni);
+			detectarColision(jugador,obstaculo);
+			detectarColision(truenoLoco,lotusPoni);
+			detectarColision(lotusPoni,obstaculo);
+			detectarColision(truenoLoco,obstaculo);
 			
 		}// fin while anidado
 		

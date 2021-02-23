@@ -1,8 +1,10 @@
 #ifndef UI_H
 #define UI_H
+/**
+*esta clase sirve para informar puntaje y vida al jugador/a
+*/
 
-
-
+//inlcuimos libreria necesaria
 #include <ctime>
 
 class Ui {

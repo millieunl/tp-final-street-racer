@@ -56,7 +56,7 @@ void TruenoLoco::actualizar(){
 }
 
 //reinicia la posicion de donde sale TruenoLoco y redefine una direccion random
-void TruenoLoco::reLanzarTrueno(){
+void TruenoLoco::reLanzar(){
 	borrar();
 	x = minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) );
 	y = 3;
@@ -75,7 +75,7 @@ void TruenoLoco:: mover(){
 		y++;
 	}else{
 		//si salio de pantalla, relanza el  y suma una vuelta
-		reLanzarTrueno();
+		reLanzar();
 		contadorVueltas+=1;
 	}
 }
@@ -107,7 +107,7 @@ void TruenoLoco::moverDiagonalIzquierda(){
 //este metodo se llama en la clase Juego, para cuando se detecta un choque entre 
 //TruenoLoco y otro vehiculo/obstaculo sirve para relanzar a este auto
 void TruenoLoco::chocar(){
-	reLanzarTrueno();
+	reLanzar();
 }
 
 //devuleve la cantodad de vueltas que pudo dar truenoLoco

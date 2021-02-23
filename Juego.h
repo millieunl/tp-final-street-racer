@@ -7,7 +7,7 @@
 #include "Vehiculo.h"
 #include "Intro.h"
 #include "Outro.h"
-
+#include "Obstaculo.h"
 class Juego {
 public:
 
@@ -24,6 +24,7 @@ private:
 	Vehiculo *jugador;
 	Vehiculo *lotusPoni;
 	Vehiculo *truenoLoco;
+	Obstaculo *obstaculo;
 	
 	//
 	Ui *ui;
@@ -34,13 +35,13 @@ private:
 	//metodos
 	void actualizar();
 	void eventos();
-	void detectarColision();
 	void lanzarIntro();
 	void lanzarOutro();
 	void reiniciar();
+	void detectarColision(Vehiculo *v1, Obstaculo *obs);
+	void detectarColision(Vehiculo *v1, Vehiculo *v2);
 	bool hayColision( Vehiculo *v1, Vehiculo *v2);
-	
-	
+	bool hayColision(Vehiculo *v1, Obstaculo *obs);
 	
 	
 };

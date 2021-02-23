@@ -25,13 +25,13 @@ public:
 	void acelerar();
 	void reset();
 	
-private:
+protected:
 	//atributos propios de la clase
 	int contadorVueltas;
-	int contadorAceleraciones;
+	int contadorInicial;
 	
 	//metodos propios de esta clase
-	void reLanzarLotus();
+	void reLanzar();
 	
 	//metodos heredados de vehiculo como protected y redefinidos aqui 
 	void armarAuto();

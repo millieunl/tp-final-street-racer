@@ -10,7 +10,9 @@
 * esta clase redefine los metodos virtuales de VEHICULO y  define  eimplementa metodos y atributos propios 
 * para el movimiento en diagonal, la cuenta de vueltas y la aceleracion de este enemigo
 */
-class TruenoLoco :public Vehiculo {
+
+
+class TruenoLoco : public Vehiculo {
 public:
 	TruenoLoco();
 	~TruenoLoco(){};
@@ -31,7 +33,7 @@ private:
 	int contadorInicial;
 	
 	//metodos propios de esta clase
-	void reLanzarTrueno();
+	void reLanzar();
 	void moverDiagonalDerecha();
 	void moverDiagonalIzquierda();
 	
