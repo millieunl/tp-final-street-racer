@@ -1,24 +1,15 @@
 #include "LotusPoni.h"
 #include <conio2.h>
 
+//contructor
 LotusPoni::LotusPoni() {	
 	armarAuto();
 	reset();
 }
 
-void LotusPoni::acelerar(){
-	if(contadorVueltas== contadorAceleraciones)  return;
-	contadorAceleraciones=contadorVueltas;
-	velocidad += 2;
-	paso = CLOCKS_PER_SEC/velocidad;
-	
-	gotoxy(1,3);
-	std::cout<<"acelera Poni  " <<velocidad;
-	
-	
-}
+//Carga el modelo y color del LotusPoni
 void LotusPoni::armarAuto(){
-	//matriz que carga el diseño del auto
+	//cargar matriz con codigo de los caracteres ascii  para el modelo del auto
 	matriz[0][0] = 219;
 	matriz[0][1] = 205;
 	matriz[0][2] = 178;
@@ -35,7 +26,8 @@ void LotusPoni::armarAuto(){
 	matriz[2][3] = 205;
 	matriz[2][4] = 219;
 	
-	//carga la matriz con los colores del auto del enemigo LotusPoni
+	//carga la matriz con los colores del auto de LotusPoni
+	//es AMARILLO
 	color[0][0] = 0;  //rueda es negra
 	color[0][1] = 0;
 	color[0][2] = 14;  //punta es amarilla
@@ -52,6 +44,8 @@ void LotusPoni::armarAuto(){
 	color[2][3] = 0;
 	color[2][4] = 0;    //rueda es negra
 }
+
+//actualiza el objeto en  posicion y dibujo
 void LotusPoni::actualizar(){
 	if(tempo + paso < clock()) {
 		mover();
@@ -60,42 +54,59 @@ void LotusPoni::actualizar(){
 	}
 }
 
-void LotusPoni::reiniciarLotus(){
+//reinicia la posicion de donde sale LotusPoni
+void LotusPoni::reLanzarLotus(){
 	borrar();
 	setPosicion(minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) ),3);
 }
+
+//se llama en el metodo actualizar, mueve este auto 
+//verificando que esté dentro de la carretera y avanza el linea recta hacia abajo(y++)
 void LotusPoni:: mover(){
 	if (y + alto < maxLimiteY){
 		borrar();
 		y++;;
 	}else {
-		reiniciarLotus();
+		reLanzarLotus();
 		contadorVueltas+=1;
 	}
 	
 }
 
-//cuando el auto choca se reinicia a su posicion inicial
+//este metodo se llama en la clase Juego, para cuando se detecta un choque entre 
+//LotusPoni y otro vehiculo/obstaculo, sirve para relanzar el auto
 void LotusPoni::chocar(){
-	reiniciarLotus();
+	reLanzarLotus();
 }
 
+//este metodo acelera a LotusPoni y verifica que solo acelere una vez
+void LotusPoni::acelerar(){
+	if(contadorVueltas== contadorAceleraciones)  return;
+	contadorAceleraciones=contadorVueltas;
+	velocidad += 2;
+	paso = CLOCKS_PER_SEC/velocidad;
+}
+
+//devuleve la cantidad de vueltas dadas hasta el momento
 int LotusPoni::getVueltas(){
 	return contadorVueltas;
 }
 
-LotusPoni::~LotusPoni() {
-	
-}
-
+//resetea las variables por defecto de LotusPoni para posicionar, definir velocidad, reloj y vueltas
 void LotusPoni::reset(){
 	x = minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) );
 	y = 3;
 	
+	//velocidad inicial de truenoLoco
 	velocidad = 4;
+	
+	//inicializa contadores
+	contadorVueltas = 0;
+	contadorAceleraciones = 0;
+	
+	//inicializa reloj,
 	tempo = clock();
 	paso = CLOCKS_PER_SEC/velocidad;
 
-	contadorVueltas = 0;
-	contadorAceleraciones = 0;
+	
 }

@@ -3,40 +3,32 @@
 #include "LotusPoni.h"
 #include "TruenoLoco.h"
 #include <conio2.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <time.h>
 #include <Windows.h>
+
+
 //contructor de la clase
 Juego::Juego() {
-	//iniciamos la semilla para random
+	//iniciamos la semilla para randomizar valores
 	srand (time(NULL)); 
-	
-	//para fixear el color de fondo
-	textbackground(DARKGRAY);
-	clrscr();
 	
 	//instanciamos objetos y seteamos valores, inicializamos boleanas
 	jugador = new Jugador();
 	jugador->setPosicion(31,23);  //x = 31 y = 23
-	
 	lotusPoni = new LotusPoni();
 	truenoLoco = new TruenoLoco();
-	
 	ui = new Ui();
 	ui->setVidas(jugador->getVidas());
-	
 	nivel = new Nivel();
 	nivel->dibujar();
-	
-	
 	intro = new Intro();
 	outro = new Outro();
-	
-	
 }
 
-//destructor de clase
+//destructor
 Juego::~Juego() {
+	//destruimos los objetos y // Libera la memoria reservada a cada uno
 	delete intro;
 	delete jugador;
 	delete lotusPoni;
@@ -46,36 +38,34 @@ Juego::~Juego() {
 	delete outro;
 }
 
+
 void Juego::eventos(){
-	if (kbhit()){
-		int tecla = getch(); //captura la tecla que se presiona
-		switch(tecla) {
-		case 67:
-		case 77://derecha
-			//llama funcion para moverse a la derecha
-			jugador->moverDerecha();
-			break;
-		case 68:
-		case 75://izquierda
-			//llama funcion para moverse a la izquierda
-			jugador->moverIzquierda();
-			break;
-		}
+	
+	jugador->mover();
+	
+	/*
+	//if(kbhit()){
+	int tecla = getch(); //captura la tecla que se presiona
+	switch(tecla) {
+	case 67:
+	case 77://derecha
+	//llama funcion para moverse a la derecha
+	//jugador->moverDerecha();
+	jugador->mover();
+	break;
+	case 68:
+	case 75://izquierda
+	//llama funcion para moverse a la izquierda
+	//jugador->moverIzquierda();
+	break;
 	}
-}
-
-bool Juego::hayColision(Vehiculo *v1, Vehiculo *v2){
-	//arreglar el tema de los punteros dentro de un argumento, quien libera ese puntero
-	if((v1-> getX() < v2->getX() + v2->getAncho()) &&
-		(v1->getX() + v1->getAncho() > v2->getX()) &&
-	    (v1-> getY() < v2->getY() + v2->getAlto()) &&
-		(v1->getY() + v1->getAlto() > v2->getY())){
-		return true;
 	}
-	return false;
+	*/
+	
 }
 
 
+//lanza la escena de introduccion al juego:limpia pantalla y actualiza la misma
 void Juego::lanzarIntro(){
 	textbackground(BLACK);
 	clrscr();
@@ -83,7 +73,9 @@ void Juego::lanzarIntro(){
 	textbackground(DARKGRAY);
 	clrscr();
 }
- void Juego::lanzarOutro(){
+
+//lanza la escena de GAME OVER al juego:limpia pantalla y actualiza la misma
+void Juego::lanzarOutro(){
 	textbackground(BLACK);
 	clrscr();
 	outro->setPuntaje(ui->getPuntaje());
@@ -92,6 +84,7 @@ void Juego::lanzarIntro(){
 	clrscr();
 }
 
+//hace los llamados a los metodos para reiniciar  todos los objetos
 void Juego:: reiniciar(){
 	//reinicia todos los parametros para el juego
 	jugador->reset();
@@ -100,8 +93,19 @@ void Juego:: reiniciar(){
 	outro->reset();
 }
 
+//devuelve true si hay  alguna colision entre dos objetos del tipo vehiculo
+bool Juego::hayColision(Vehiculo *v1, Vehiculo *v2){
+	if((v1-> getX() < v2->getX() + v2->getAncho()) &&
+		(v1->getX() + v1->getAncho() > v2->getX()) &&
+		(v1-> getY() < v2->getY() + v2->getAlto()) &&
+		(v1->getY() + v1->getAlto() > v2->getY())){
+		return true;
+	}
+		return false;
+}
+
+//Si hay colision entre vehiculos define quien choco con quien y muestra el choque
 void Juego::detectarColision(){
-	
 	//choque jugador-truenoLoco
 	if(hayColision(jugador,truenoLoco)){
 		truenoLoco->chocar();
@@ -118,24 +122,31 @@ void Juego::detectarColision(){
 		truenoLoco->chocar();
 	}
 }
+
+//actualiza la escena
+void Juego::actualizar(){
+	ui->actualizar();
+	nivel->actualizar();
+	jugador->actualizar();
+	lotusPoni->actualizar();
+	truenoLoco->actualizar();
+}
+
+//lanza el bucle principal del juego
 void Juego::jugar(){
-	while(true){ //mientras no quiera salir del juego
-		
+	//mientras no quiera salir del juego
+	while(true){ 
 		//lanza la pantalla de introduccion del juego		
 		lanzarIntro();
 		
 		//dibuja el escenario del juego
 		nivel->dibujar();	
 		
-		//comienza el bucle del juego
-		while(jugador->getVidas() > 0){  //mientras tenga vida
+		//bucle  para jugar mientras tenga vida
+		while(jugador->getVidas() > 0){ 
 			
-			//actualizamos
-			ui->actualizar();
-			nivel->actualizar();
-			jugador->actualizar();
-			lotusPoni->actualizar();
-			truenoLoco->actualizar();
+			//actualizamos la escena completa
+			actualizar();
 			
 			//eventos para el teclado
 			eventos();
@@ -149,28 +160,24 @@ void Juego::jugar(){
 				truenoLoco->acelerar();
 				lotusPoni->acelerar();
 			}	
+			
 			//detecta colisiones y muestra el choque
 			detectarColision();
 			
-			//cuando no hay mas vidas y que no vaya abrutmanete a la pantalla de game over
-			if(jugador->getVidas() == 0) { 
-				ui->setVidas(0);
-				ui->dibujar();
-				Sleep(1000);
-			}
 		}// fin while anidado
+		
+		//cuando no hay mas vidas y que no vaya abrutmanete a la pantalla de game over
+		ui->setVidas(0);
+		ui->dibujar();
+		Sleep(1000);
 		
 		//lanza la pantalla de game over
 		lanzarOutro();
 		
-		// decide si salir del  bucle del juego o no
-		if(outro->getQuiereSalir()){
-			//se va del bucle y termina el juego
-			break; 
-		}else{
-			//reiniciar todos los parametros para volver a jugar
-			reiniciar(); 
-		}
+		// si es True sale del bucle = fin  del juego sino reinicia la jugada
+		if(outro->getQuiereSalir()) break; 
+		else reiniciar();
+	
 	}//fin while principal	
 	
 }

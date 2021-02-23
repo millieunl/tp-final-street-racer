@@ -1,9 +1,10 @@
 #include "Vehiculo.h"
 #include <conio2.h>
 
+//contructor que inicializa las variables con valores comunes para todas las derivadas
 Vehiculo::Vehiculo() {
 	
-	//guardamos el ancho y alto de la matriz
+	//guardamos el ancho y alto de la matriz (ancho y alto del auto)
 	ancho = 5; 
 	alto = 3; 
 	
@@ -12,12 +13,10 @@ Vehiculo::Vehiculo() {
 	minLimiteX = 31;
 	maxLimiteY = 27;
 	minLimiteY = 1;
-	
-	
 }
 
+//recorre con un for las matrices para dibujar y colorear un vehiculo
 void Vehiculo::dibujar(){
-	//for para dibujar la matriz que tiene el diseño del auto
 	for(int i = 0; i < alto; i++){
 		for (int j = 0; j < ancho; j++){
 			textbackground(DARKGRAY);
@@ -29,6 +28,8 @@ void Vehiculo::dibujar(){
 	}
 }
 
+//borra un vehiculo, se usa para borrar el rastro que deja mover el vehiculo en X,Y
+//agrega un caracter vacio en la coordenada X,Y donde esta el vehiculo actualmente
 void Vehiculo::borrar(){
 	for(int i = 0; i < alto; i++) {
 		for (int j = 0; j < ancho; j++) {
@@ -39,40 +40,38 @@ void Vehiculo::borrar(){
 	}
 }
 
-void Vehiculo::setLimite(int x0, int x1, int y0, int y1){
-	minLimiteX = x0;
-	maxLimiteX = x1;
-}
-
-
-//ver si se esta usando
+//setter y getters
+//se usa para setear la posicion de un vehiculo en X e Y
 void Vehiculo::setPosicion(int x, int y){
 	this -> x = x;
 	this -> y = y;
 }
 
-//getters
+//devuelve el ancho del auto
 int Vehiculo::getAncho(){
 	return ancho;
 }
 
+//devuelve el alto del auto
 int Vehiculo::getAlto(){
 	return alto;
 }
 
+//devuelve la poscion X del auto
 int Vehiculo::getX(){
 	return x;
 }
+
+//devuelve la posicion Y del auto
 int Vehiculo::getY(){
 	return y;
 }
 
+//devuelve las vidas del conductor del auto
 int Vehiculo::getVidas(){
 	return vidas;
 }
 
 
-Vehiculo::~Vehiculo() {
-	
-}
+
 
