@@ -22,21 +22,21 @@ Juego::Juego() {
 	ui->setVidas(jugador->getVidas());
 	nivel = new Nivel();
 	nivel->dibujar();
-	intro = new Intro();
-	outro = new Outro();
+	introduccion = new Introduccion();
+	epilogo = new Epilogo();
 }
 
 //destructor
 Juego::~Juego() {
 	//destruimos los objetos y // Libera la memoria reservada a cada uno
-	delete intro;
+	delete introduccion;
 	delete jugador;
 	delete lotusPoni;
 	delete truenoLoco;
 	delete obstaculo;
 	delete ui;
 	delete nivel;
-	delete outro;
+	delete epilogo;
 }
 
 //este metodo llama a  los eventos de otras clases
@@ -49,7 +49,7 @@ void Juego::eventos(){
 void Juego::lanzarIntro(){
 	textbackground(BLACK);
 	clrscr();
-	intro->actualizar();
+	introduccion->actualizar();
 	textbackground(DARKGRAY);
 	clrscr();
 }
@@ -58,8 +58,8 @@ void Juego::lanzarIntro(){
 void Juego::lanzarOutro(){
 	textbackground(BLACK);
 	clrscr();
-	outro->setPuntaje(ui->getPuntaje());
-	outro->actualizar();
+	epilogo->setPuntaje(ui->getPuntaje());
+	epilogo->actualizar();
 	textbackground(BLACK);
 	clrscr();
 }
@@ -71,7 +71,7 @@ void Juego:: reiniciar(){
 	lotusPoni->reset();
 	truenoLoco->reset();
 	obstaculo->reset();
-	outro->reset();
+	epilogo->reset();
 }
 
 //****************************************************
@@ -179,10 +179,12 @@ void Juego::jugar(){
 		lanzarOutro();
 		
 		// si es True sale del bucle = fin  del juego sino reinicia la jugada
-		if(outro->getQuiereSalir()) break; 
+		if(epilogo->getQuiereSalir()) {
+			epilogo->mostrarDespedida();
+			break; 
+		}
 		else reiniciar();
 	
 	}//fin while principal	
-	
 }
 

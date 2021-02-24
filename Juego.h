@@ -5,8 +5,8 @@
 #include "Ui.h"
 #include "Nivel.h"
 #include "Vehiculo.h"
-#include "Intro.h"
-#include "Outro.h"
+#include "Introduccion.h"
+#include "Epilogo.h"
 #include "Obstaculo.h"
 class Juego {
 public:
@@ -27,8 +27,8 @@ private:
 	//
 	Ui *ui;
 	Nivel *nivel;
-	Intro *intro;
-	Outro *outro;
+	Introduccion *introduccion;
+	Epilogo *epilogo;
 	
 	//metodos
 	void actualizar();

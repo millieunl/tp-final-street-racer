@@ -1,16 +1,9 @@
-#include "Intro.h"
+#include "Introduccion.h"
 #include <conio2.h>
 #include<iostream>
 
-Intro::Intro() {
-	
-}
 
-Intro::~Intro() {
-	
-}
-
-void Intro::mostraReglas(){
+void Introduccion::mostraReglas(){
 	//titulo con el nombre del juego
 	textcolor(LIGHTGREEN);
 	gotoxy(25,3);
@@ -47,7 +40,7 @@ void Intro::mostraReglas(){
 	textcolor(WHITE);
 	gotoxy(1,15);
 	std::cout<<"- * - Tu auto se desplaza hacia los costados con las teclas izquierda y derecha del teclado."<<std::endl;
-	std::cout<<"- * - esquiva a los enemigos y obstaculos para llegar lo mas lejos que puedas."<<std::endl;
+	std::cout<<"- * - Esquiva a los enemigos y obstaculos para llegar lo mas lejos que puedas."<<std::endl;
 	std::cout<<"- * - Atencion que cada enemigo sorteado suma puntaje!"<<std::endl;
 	std::cout<<"- * - "<<char(173)<<"Ten cuidado, chocar enemigos y osbtaculos en el camino te quitara vidas!"<<std::endl;
 	std::cout<<"- * - Si te quedas sin vidas... pierdes este juego."<<std::endl;
@@ -81,15 +74,15 @@ void Intro::mostraReglas(){
 	std::cout<< "-------------------"<<std::endl;
 	
 }
-
-void  Intro::actualizar(){
+//actualiza la escena
+void  Introduccion::actualizar(){
 	while(true){
 		mostraReglas();
 		if(eventos()) break;
 	}	
 }
-bool Intro::eventos(){
-	
+//devuelve true cuando se presiona la tecla ENTER
+bool Introduccion::eventos(){
 	if (kbhit()){
 		int tecla = getch(); //captura la tecla que se presiona
 		if(tecla == 13){
