@@ -1,5 +1,6 @@
 #ifndef TRUENOLOCO_H
 #define TRUENOLOCO_H
+
 //incluimos el encabezado de la clase base
 #include "Vehiculo.h"
 
@@ -14,7 +15,7 @@
 
 class TruenoLoco : public Vehiculo {
 public:
-	TruenoLoco();
+	TruenoLoco(int velocidad);
 	~TruenoLoco(){};
 
 	//metodos que se heredan de vehiculo para definir en esta clase sus comportamientos

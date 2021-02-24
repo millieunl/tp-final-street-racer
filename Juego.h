@@ -12,14 +12,12 @@ class Juego {
 public:
 
 	Juego();   			//constructor
-	~Juego();  			//destructor
-	
+	~Juego();  			//destructor	
 	//metdodo que lanza todo el juego, es publico por que se llama desde main
 	void jugar(); 		//esta funcion inicia el juego
 	
 private:
 	//atributos
-	
 	//punteros Vehiculo que apunta a la clase base, pero  luego referencia a las derivadas
 	Vehiculo *jugador;
 	Vehiculo *lotusPoni;
@@ -42,7 +40,6 @@ private:
 	void detectarColision(Vehiculo *v1, Vehiculo *v2);
 	bool hayColision( Vehiculo *v1, Vehiculo *v2);
 	bool hayColision(Vehiculo *v1, Obstaculo *obs);
-	
 	
 };
 

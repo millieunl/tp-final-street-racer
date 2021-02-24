@@ -18,7 +18,7 @@
 class Vehiculo {
 public:
 	//constructor y destructor 
-	Vehiculo();
+	Vehiculo(int velocidad );
 	virtual ~Vehiculo(){};
 	
 	//metodos  virtuales que se van a definir en las clases derivadas
@@ -53,8 +53,10 @@ protected:
 	int maxLimiteY;
 	int minLimiteX;
 	int minLimiteY;
+	const int velocidadInicial;
 	int velocidad;  //un entero que sirve para calcular la velocidad y el tiempo
 	int vidas;
+	
 
 	//variables tipo clock
 	clock_t tempo;

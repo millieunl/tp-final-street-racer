@@ -2,8 +2,9 @@
 #include <conio2.h>
 
 //contructor que inicializa las variables con valores comunes para todas las derivadas
-Vehiculo::Vehiculo() {
+Vehiculo::Vehiculo(int velocidad) : velocidadInicial(velocidad) {
 	
+	this->velocidad = 0;
 	//guardamos el ancho y alto de la matriz (ancho y alto del auto)
 	ancho = 5; 
 	alto = 3; 

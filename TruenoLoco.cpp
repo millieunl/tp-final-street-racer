@@ -2,7 +2,7 @@
 #include <conio2.h>
 
 //contructor
-TruenoLoco::TruenoLoco() {	
+TruenoLoco::TruenoLoco(int velocidad): Vehiculo(velocidad) {	
 	//dibujo del auto Trueno Loco
 	armarAuto();
 	reset();	
@@ -11,7 +11,8 @@ TruenoLoco::TruenoLoco() {
 
 //Carga el modelo y color del TruenoLoco
 void TruenoLoco::armarAuto(){
-	//cargar matriz con codigo de los caracteres ascii  para el modelo del auto
+	
+	//cargamos matriz con codigo de los caracteres ascii  para el modelo del auto
 	matriz[0][0] = 219;
 	matriz[0][1] = 205;
 	matriz[0][2] = 178; 
@@ -48,7 +49,7 @@ void TruenoLoco::armarAuto(){
 }
 //actualiza el objeto en  posicion y dibujo
 void TruenoLoco::actualizar(){
-	if(tempo + paso < clock()) {
+	if(tempo + paso < clock()) {		
 		mover();
 		dibujar();
 		tempo = clock();
@@ -132,18 +133,17 @@ void TruenoLoco::reset(){
 	x = minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) );
 	y = 3;
 	
-	//velocidad inicial de truenoLoco
-	velocidad = 3;
-	
 	//inicializa contadores
 	contadorVueltas = 0;
 	contadorInicial = 0;
 	
 	// elige direccion al azar entre 0 y 1 (0 izq, 1 der)
 	direccion = rand()% 2;
+	
+	//velocidad inicial de truenoLoco 
+	velocidad = velocidadInicial;
 	tempo = clock();
 	paso = CLOCKS_PER_SEC/velocidad;
 	
-	
-	
+
 }

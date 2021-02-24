@@ -15,10 +15,7 @@ public:
 private:
 	//metodos
 	void mostraReglas();
-	bool eventos();
-	
-	clock_t tempo;
-	clock_t paso;
+	bool eventos();	
 };
 
 #endif

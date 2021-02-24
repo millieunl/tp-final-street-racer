@@ -2,8 +2,8 @@
 #define JUGADOR_H
 /**
 * Esta clase deriva de Vehiculo para crear al vehiculo del jugador
-* que hereda metodos virtuales  y atraibutos comunes y los redefine para si misma
-* pero tambien tiene metodos  para definir comportamientos  propios como
+* que hereda metodos virtuales  y atributos comunes. Algunos los redefine para si misma.
+* Tiene metodos  para definir comportamientos  propios como
 como los del movimiento hacia derecha o izquierda o los del efecto del choque
 */
 
@@ -16,7 +16,7 @@ como los del movimiento hacia derecha o izquierda o los del efecto del choque
 class Jugador : public Vehiculo{
 public:
 	//constructor y destructor
-	Jugador();
+	Jugador(int velocidad);
 	~Jugador();
 	
 	//metodos que se heredan de Vehiculo y se define en esta clase sus comportamientos

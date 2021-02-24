@@ -3,7 +3,6 @@
 #include "LotusPoni.h"
 #include "TruenoLoco.h"
 #include <conio2.h>
-//#include <stdlib.h>
 #include <time.h>
 #include <Windows.h>
 
@@ -14,18 +13,17 @@ Juego::Juego() {
 	srand (time(NULL)); 
 	
 	//instanciamos objetos y seteamos valores, inicializamos boleanas
-	jugador = new Jugador();
+	jugador = new Jugador(30);
 	jugador->setPosicion(31,23);  //x = 31 y = 23
-	lotusPoni = new LotusPoni();
-	truenoLoco = new TruenoLoco();
-	obstaculo = new Obstaculo();
+	lotusPoni = new LotusPoni(4);
+	truenoLoco = new TruenoLoco(5);
+	obstaculo = new Obstaculo(2);
 	ui = new Ui();
 	ui->setVidas(jugador->getVidas());
 	nivel = new Nivel();
 	nivel->dibujar();
 	intro = new Intro();
 	outro = new Outro();
-
 }
 
 //destructor
@@ -46,7 +44,6 @@ void Juego::eventos(){
 	//llama al evento que sirven para mover al jugador
 	jugador->mover();
 }
-
 
 //lanza la escena de introduccion al juego:limpia pantalla y actualiza la misma
 void Juego::lanzarIntro(){

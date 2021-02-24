@@ -8,13 +8,13 @@
 * es la clase del enemigo LotusPoni Auto AMARILLO que se mueve en linea recta
 ---------------------------------------------------------------------------------------------
 * Esta CLASE se deriva de Vehiculos y hereda sus metodos y atributos para armar un Vehiculo
-* esta clase redefine los metodos virtuales de VEHICULO y  define  eimplementa metodos y atributos propios 
+* esta clase redefine los metodos virtuales de VEHICULO y  define  e implementa metodos y atributos propios 
 * para el movimiento , la cuenta de vueltas y la aceleracion de este enemigo
 */
 class LotusPoni : public Vehiculo {
 public:
 	//contructor y destructor
-	LotusPoni();
+	LotusPoni(int velocidad);
 	~LotusPoni(){};
 	
 	//metodos que se heredan de vehiculo para definir en esta clase sus comportamientos

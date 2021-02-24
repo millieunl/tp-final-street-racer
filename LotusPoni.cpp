@@ -2,7 +2,7 @@
 #include <conio2.h>
 
 //contructor
-LotusPoni::LotusPoni() {	
+LotusPoni::LotusPoni(int velocidad): Vehiculo(velocidad) {	
 	armarAuto();
 	reset();
 }
@@ -47,7 +47,7 @@ void LotusPoni::armarAuto(){
 
 //actualiza el objeto en  posicion y dibujo
 void LotusPoni::actualizar(){
-	if(tempo + paso < clock()) {
+	if(tempo + paso < clock()) {		
 		mover();
 		dibujar();
 		tempo = clock();
@@ -95,19 +95,18 @@ int LotusPoni::getVueltas(){
 
 //resetea las variables por defecto de LotusPoni para posicionar, definir velocidad, reloj y vueltas
 void LotusPoni::reset(){
+	//seta x e Y
 	x = minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) );
 	y = 3;
 	
-	//velocidad inicial de truenoLoco
-	velocidad = 4;
-	
 	//inicializa contadores
 	contadorVueltas = 0;
-	contadorInicial = 0;
-	
-	//inicializa reloj,
-	tempo = clock();
-	paso = CLOCKS_PER_SEC/velocidad;
+	contadorInicial = 0;	
 
+	//velocidad inicial de lotusPoni
+	velocidad = velocidadInicial;
+	//inicializa reloj
+	paso = CLOCKS_PER_SEC/velocidad;
+	tempo = clock();
 	
 }

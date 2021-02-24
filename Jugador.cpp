@@ -2,7 +2,7 @@
 #include <conio2.h>
 
 //constructor
-Jugador::Jugador() {
+Jugador::Jugador(int velocidad) : Vehiculo(velocidad){
 	temporizador = new Temporizador();
 	armarAuto();
 	reset();
@@ -10,7 +10,13 @@ Jugador::Jugador() {
 
 //metodo para armar  auto completo con su modelo y color
 void Jugador::armarAuto(){
-	//cargar matriz con el modelo del auto, los numeros son codigos de caracteres 
+	/* cargamos la matriz para el modelo del auto del jugador
+	los numeros son codigos de caracteres ascii extended.
+	Modelo del auto:
+	¦-¦-¦
+	 /¦\
+	¦-¦-¦
+	*/
 	matriz[0][0] = 219;
 	matriz[0][1] = 205;
 	matriz[0][2] = 178;
@@ -76,7 +82,7 @@ void Jugador::romperAuto(){
 //
 void Jugador::actualizar(){
 	//mide el tiempo para actualizar
-	if(tempo + paso < clock()) {
+	if(tempo + paso < clock()) {		
 		//dibuja al auto(recorriendo la matriz con el modelo y color)
 		dibujar();
 		//efecto para el choque
@@ -161,7 +167,7 @@ void Jugador:: mover(){
 
 //reinicia/resetea las variables por defecto para el inicio o reinicio del juego
 void Jugador::reset(){
-	velocidad = 60;
+	velocidad = velocidadInicial;  
 	tempo = clock();
 	paso = CLOCKS_PER_SEC/velocidad;
 	estaParpadeando = false;

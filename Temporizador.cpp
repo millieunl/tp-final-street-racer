@@ -1,7 +1,7 @@
 #include "Temporizador.h"
 
 Temporizador::Temporizador() {
-	
+	tiempo_deseado = 0;
 }
 
 void Temporizador::iniciar(time_t td){
