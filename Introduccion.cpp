@@ -22,7 +22,7 @@ void Introduccion::mostraReglas(){
 	//mensaje de bienvenida
 	textcolor(LIGHTCYAN);
 	gotoxy(18,10);
-	std::cout<<"BIENVENIDO/A A SPEED RACER CORREDOR/A. Comienza esta alocada carrera de autos!"<<std::endl;
+	std::cout<<"BIENVENIDO/A A STREET RACER CORREDOR/A. Comienza esta alocada carrera de autos!"<<std::endl;
 	
 	//marquesina de color
 	for (int i = 0;i<110;i++){
@@ -33,43 +33,42 @@ void Introduccion::mostraReglas(){
 	
 	//subtitulo
 	textcolor(YELLOW);
-	gotoxy(1,13);
+	gotoxy(3,13);
 	std::cout<<char(173)<<"Como se juega?"<<std::endl;
 	
 	//reglas  y gameplay explicadas
 	textcolor(WHITE);
 	gotoxy(1,15);
-	std::cout<<"- * - Tu auto se desplaza hacia los costados con las teclas izquierda y derecha del teclado."<<std::endl;
-	std::cout<<"- * - Esquiva a los enemigos y obstaculos para llegar lo mas lejos que puedas."<<std::endl;
-	std::cout<<"- * - Atencion que cada enemigo sorteado suma puntaje!"<<std::endl;
+	std::cout<<"- * - Tu auto se desplaza hacia los costados con las teclas [IZQUIERDA] y [DERECHA] del teclado."<<std::endl;
+	std::cout<<"- * - Objetivo:Llegar lo mas lejos que puedas y sumar muchos puntos."<<std::endl;
+	std::cout<<"- * - Atencion, que cada enemigo sorteado suma puntaje!"<<std::endl;
 	std::cout<<"- * - "<<char(173)<<"Ten cuidado, chocar enemigos y osbtaculos en el camino te quitara vidas!"<<std::endl;
 	std::cout<<"- * - Si te quedas sin vidas... pierdes este juego."<<std::endl;
-	std::cout<<"- * - Para no perder, esquiva los enemigos Trueno Loco y con Lotus Poni y a los obstaculos."<<std::endl;
-	std::cout<<"- * - Esquivalos, "<<std::endl;
+	std::cout<<"- * - Para no perder, esquiva todo lo que se te cruce en el camino corredor/a!."<<std::endl;
 	std::cout<<"- * -"<<char(173)<<"Mas desafiante! Cada 20 puntos los obstaculos y enemigos sorteados obtendran mayor velocidad! "<<std::endl;
 	
 	//marquesina
 	for (int i = 0;i<110;i++){
 		textcolor(rand()%6 +10);
-		gotoxy(1+i,24);
+		gotoxy(1+i,23);
 		std::cout<<"*";
 		
 	}
 	
 	//mensaje para invitar a comenzar el juego
-	gotoxy(10,25);
+	gotoxy(10,24);
 	textcolor(LIGHTGREEN);
 	std::cout<<"Hace calor, el sol quema el asfalto, puedes sentir los motores en marcha... "<<std::endl;
-	gotoxy(10,26);
+	gotoxy(10,25);
 	std::cout<< "Estas preparado/a para comenzar? ----> Presiona ENTER CUANDO ESTES LISTO/A <----"<<std::endl;
 	//boton 
-	gotoxy(47,27);
+	gotoxy(47,26);
 	textcolor(YELLOW);
 	std::cout<< "-------------------"<<std::endl;
-	gotoxy(48,28);
+	gotoxy(48,27);
 	textcolor(LIGHTMAGENTA);
 	std::cout<< "SI ESTOY LISTO/A!"<<std::endl;
-	gotoxy(47,29);
+	gotoxy(47,28);
 	textcolor(YELLOW);
 	std::cout<< "-------------------"<<std::endl;
 	

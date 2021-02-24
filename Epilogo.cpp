@@ -165,9 +165,10 @@ bool Epilogo::eventos(){
 return false;
 }
 
-//muestra un texto de despedida con agradecimiento al jugador y nombre de la autora
+//muestra un texto de despedida con agradecimiento al jugador/a y nombre de la autora
 void Epilogo:: mostrarDespedida(){
 	clrscr();
+	//mensaje que dice : " Gracias por jugar!"
 	gotoxy(12,6);
 	textcolor(LIGHTGREEN);
 	std::cout<< "  __   __        __          __      __   __   __                __        __       /"<<std::endl;
@@ -178,15 +179,11 @@ void Epilogo:: mostrarDespedida(){
 		<<char(92)<<" .__/    |    "<<char(92)<<"__/ |  "<<char(92)<<"    "<<char(92)<<"__/ "
 		<<char(92)<<"__/ "<<char(92)<<"__> /~~"<<char(92)<<" |  "<<char(92)<<"    ."<<std::endl;
 	
+	//nombre alumna autora
 	gotoxy(40,12);
 	textcolor(LIGHTCYAN);
 	std::cout<< "MARIA EMILIA CORBETTA 2021 "<<std::endl;
 	textcolor(LIGHTGRAY);
-	
-	
-	
-	
-
 	
 }
 

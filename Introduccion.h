@@ -8,6 +8,7 @@ Captura evento del teclado que sirve para pasar a la siguiente pantalla
 */
 class Introduccion {
 public:
+	//contructor y destructor
 	Introduccion(){};
 	~Introduccion(){};
 	
