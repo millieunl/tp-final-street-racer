@@ -1,13 +1,17 @@
 #ifndef JUEGO_H
 #define JUEGO_H
 
-//incluimos los encabezados de las clases 
+//incluimos los encabezados de las clases que necesitamos aqui
 #include "Ui.h"
 #include "Nivel.h"
 #include "Vehiculo.h"
 #include "Introduccion.h"
 #include "Epilogo.h"
 #include "Obstaculo.h"
+
+/**
+En esta clase se maneja todas la logica y reglas del juego
+*/
 class Juego {
 public:
 
@@ -30,11 +34,14 @@ private:
 	Introduccion *introduccion;
 	Epilogo *epilogo;
 	
+	
+	int puntajeInicial;
+	
 	//metodos
 	void actualizar();
 	void eventos();
 	void lanzarIntro();
-	void lanzarOutro();
+	void lanzarEpilogo();
 	void reiniciar();
 	void detectarColision(Vehiculo *v1, Obstaculo *obs);
 	void detectarColision(Vehiculo *v1, Vehiculo *v2);

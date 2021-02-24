@@ -28,7 +28,6 @@ public:
 protected:
 	//atributos propios de la clase
 	int contadorVueltas;
-	int contadorInicial;
 	
 	//metodos propios de esta clase
 	void reLanzar();

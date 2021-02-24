@@ -5,8 +5,9 @@
 #include <ctime>
 
 /**
-* Esta clase se usa para armar el escenario del Juego
+* Esta clase se usa para armar el escenario/nivel del Juego
 * arma una ruta con una linea punteada y bordes rodeada de pasto
+* lleva la cuenta del nivel actual
 */
 class Nivel {
 public:
@@ -17,12 +18,16 @@ public:
 	//metodos publicos
 	void actualizar();
 	void dibujar();
+	void subirNivel();
+	void reset();
+	int getNivel();
 	
 private:
 	//atributos
 	int altoPasto;
 	int anchoPasto;
 	int y;
+	int nivel;
 	
 	//variables para medir el tiempo 
 	clock_t tempo;

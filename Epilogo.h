@@ -8,7 +8,7 @@ y pregunta por si se quiere seguir jugando
 */
 class Epilogo {
 public:
-	Epilogo();
+	Epilogo(int puntaje);
 	~Epilogo(){};
 	
 	//metodos publicos
@@ -20,7 +20,6 @@ public:
 	
 private:
 	//atributos
-	int x;
 	int puntaje;
 	
 	//metodos
@@ -29,8 +28,6 @@ private:
 	bool eventos();
 	void mostrarMenu();
 	void mostrarMensaje();
-	
-	
 	
 };
 

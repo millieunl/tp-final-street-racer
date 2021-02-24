@@ -82,8 +82,6 @@ void LotusPoni::chocar(){
 
 //este metodo acelera a LotusPoni y verifica que solo acelere una vez
 void LotusPoni::acelerar(){
-	if(contadorVueltas== contadorInicial)  return;
-	contadorInicial=contadorVueltas;
 	velocidad += 2;
 	paso = CLOCKS_PER_SEC/velocidad;
 }
@@ -99,9 +97,8 @@ void LotusPoni::reset(){
 	x = minLimiteX + ( rand() % (( maxLimiteX - ancho)- minLimiteX + 1 ) );
 	y = 3;
 	
-	//inicializa contadores
+	//inicia el contador de vueltas
 	contadorVueltas = 0;
-	contadorInicial = 0;	
 
 	//velocidad inicial de lotusPoni
 	velocidad = velocidadInicial;

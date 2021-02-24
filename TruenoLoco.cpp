@@ -118,11 +118,6 @@ int TruenoLoco::getVueltas(){
 
 // gestiona la aceleracion del TruenoLoco
 void TruenoLoco::acelerar(){
-	//si ya se aceleró en esa vuelta y retorna, sirve para salir
-	if(contadorInicial == contadorVueltas)return;
-
-	//aca guarda se guarda el momento que se aceleró (sirve para NO acelerar de nuevo en la misma vuelta)
-	contadorInicial=contadorVueltas;
 	velocidad += 2;
 	paso = CLOCKS_PER_SEC/velocidad;
 }
@@ -135,8 +130,7 @@ void TruenoLoco::reset(){
 	
 	//inicializa contadores
 	contadorVueltas = 0;
-	contadorInicial = 0;
-	
+
 	// elige direccion al azar entre 0 y 1 (0 izq, 1 der)
 	direccion = rand()% 2;
 	

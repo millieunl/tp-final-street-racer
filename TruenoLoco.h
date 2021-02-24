@@ -29,9 +29,8 @@ public:
 private:
 	//atributos propios de esta clase
 	int direccion;
-	//contadores para las vueltas , se usan para controlar que se acelere solo una vez, mientra se espera a la siguiente vuelta
+	//contador  para las vueltas 
 	int contadorVueltas;
-	int contadorInicial;
 	
 	//metodos propios de esta clase
 	void reLanzar();

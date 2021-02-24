@@ -4,15 +4,29 @@
 
 Nivel::Nivel() {
 	//inicializamos  las variables para el reloj
+	reset();
+}
+
+//metodo que resetea las variables 
+void Nivel::reset(){
 	tempo = clock();
 	paso = CLOCKS_PER_SEC/30;
 	
 	//inicializamos el valor de ancho y alto  para las barras laterales (pasto)
 	anchoPasto = 29; 
 	altoPasto = 24 ;
-
-	y = 0;
 	
+	y = 0;
+	nivel = 1;
+}
+//este metodo sube el nivel , se lo llama en Juego cada 20 puntos sumados
+void Nivel::subirNivel(){
+	nivel+=1;
+}
+
+//devuleve el valor de nivel
+int Nivel::getNivel(){
+	return nivel;
 }
 
 //dibujamos las barras de pasto en pantalla 

@@ -1,7 +1,7 @@
 #ifndef UI_H
 #define UI_H
 /**
-*esta clase sirve para informar puntaje y vida al jugador/a
+*esta clase sirve para informar puntaje, nivel y vida al jugador/a
 */
 
 //inlcuimos libreria necesaria
@@ -10,18 +10,19 @@
 class Ui {
 public:
 	//contructor y destructor
-	Ui();
+	Ui(int vidas, int nivel);
 	~Ui(){};
 	
 	//metodos
 	void actualizar();
 	void dibujar();
+	void reset();
 	
 	void setPuntaje(int puntaje);
-	int getPuntaje();
 	void setVidas(int vida);
-	int getVidas();
-	
+	void subirNivel();
+	int getPuntaje();
+	void setNivel(int nivel);
 	
 private:
 	//atributos
@@ -29,10 +30,13 @@ private:
 	clock_t paso;
 	int puntaje;
 	int vidas;
+	int nivel;
+	int puntajeInicial;
 	
 	//metodos
 	void mostrarPuntaje();
 	void mostrarVidas();
+	void mostrarNivel();
 };
 
 #endif

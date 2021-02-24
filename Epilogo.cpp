@@ -3,15 +3,17 @@
 #include<iostream>
 
 //contructor
-Epilogo::Epilogo() {
+Epilogo::Epilogo(int puntaje) {
+	this ->puntaje = puntaje;
 	//inicializa variables
 	reset();
 }
 
 //metodo que resetea todas las variables a valores por defecto
 void Epilogo::reset(){
-	x = 0;
 	puntaje = 0;
+	
+	//inicializa boleanas
 	quiereSalir = false;	
 	capturando = true;
 }
@@ -24,12 +26,6 @@ void Epilogo::actualizar(){
 		eventos();
 	}
 }
-
-//setea el puntaje alcanzado, recibe un entero
-void Epilogo::setPuntaje(int puntaje){
-	this ->puntaje = puntaje;
-}
-
 
 //devuelve TRUE si se eligio la opcion SALIR DEL JUDEGO por el teclado
 // devuelve FALSE si quiere REINICIAR
@@ -93,6 +89,27 @@ void Epilogo::mostrarMenu(){
 	
 }
 
+//muestra un texto de despedida con agradecimiento al jugador/a y nombre de la autora
+void Epilogo:: mostrarDespedida(){
+	clrscr();
+	//mensaje que dice : " Gracias por jugar!"
+	gotoxy(12,6);
+	textcolor(LIGHTGREEN);
+	std::cout<< "  __   __        __          __      __   __   __                __        __       /"<<std::endl;
+	gotoxy(12,7);
+	std::cout<<" / _` |__)  /"<<char(92)<<"  /  ` |  /"<<char(92)<<"  /__`    |__) /  "<<char(92)<<" |__)       | |  | / _`  /"<<char(92)<<"  |__)     /"<<std::endl;
+	gotoxy(12,8);
+	std::cout<<" "<<char(92)<<"__> |  "<<char(92)<<" /~~"<<char(92)<<" "<<char(92)<<"__, | /~~"
+		<<char(92)<<" .__/    |    "<<char(92)<<"__/ |  "<<char(92)<<"    "<<char(92)<<"__/ "
+		<<char(92)<<"__/ "<<char(92)<<"__> /~~"<<char(92)<<" |  "<<char(92)<<"    ."<<std::endl;
+	
+	//nombre alumna autora
+	gotoxy(40,12);
+	textcolor(LIGHTCYAN);
+	std::cout<< "MARIA EMILIA CORBETTA 2021 "<<std::endl;
+	textcolor(LIGHTGRAY);
+	
+}
 //captura los eventos del teclado
 //para que se pueda capturar la opcion que elige el jugador(rejugar o salir)
 bool Epilogo::eventos(){
@@ -124,8 +141,7 @@ bool Epilogo::eventos(){
 			std::cout<< "QUIERO JUGAR DE NUEVO!"<<std::endl;
 			gotoxy(18,24);
 			std::cout<< "                                "<<std::endl;
-			
-			//setea la boleana en True por que desea seguir jugando
+			//setea la boleana en True por que desea SALIR del juego
 			quiereSalir = true;
 			break;
 			
@@ -159,32 +175,16 @@ bool Epilogo::eventos(){
 			//cuando capturando es true, significa que
 			// se presiono ENTER y ya se eligio una opcion
 			capturando = false;
+			std::cout<< "DESEO SALIR DEL JUEGO "<<std::endl;
+			
 			break;
 		}
 	}		
 return false;
 }
 
-//muestra un texto de despedida con agradecimiento al jugador/a y nombre de la autora
-void Epilogo:: mostrarDespedida(){
-	clrscr();
-	//mensaje que dice : " Gracias por jugar!"
-	gotoxy(12,6);
-	textcolor(LIGHTGREEN);
-	std::cout<< "  __   __        __          __      __   __   __                __        __       /"<<std::endl;
-	gotoxy(12,7);
-	std::cout<<" / _` |__)  /"<<char(92)<<"  /  ` |  /"<<char(92)<<"  /__`    |__) /  "<<char(92)<<" |__)       | |  | / _`  /"<<char(92)<<"  |__)     /"<<std::endl;
-	gotoxy(12,8);
-	std::cout<<" "<<char(92)<<"__> |  "<<char(92)<<" /~~"<<char(92)<<" "<<char(92)<<"__, | /~~"
-		<<char(92)<<" .__/    |    "<<char(92)<<"__/ |  "<<char(92)<<"    "<<char(92)<<"__/ "
-		<<char(92)<<"__/ "<<char(92)<<"__> /~~"<<char(92)<<" |  "<<char(92)<<"    ."<<std::endl;
-	
-	//nombre alumna autora
-	gotoxy(40,12);
-	textcolor(LIGHTCYAN);
-	std::cout<< "MARIA EMILIA CORBETTA 2021 "<<std::endl;
-	textcolor(LIGHTGRAY);
-	
+//setea el puntaje alcanzado, recibe un entero
+void Epilogo::setPuntaje(int puntaje){
+	this ->puntaje = puntaje;
 }
-
 

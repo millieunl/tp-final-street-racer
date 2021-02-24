@@ -13,17 +13,28 @@ Juego::Juego() {
 	srand (time(NULL)); 
 	
 	//instanciamos objetos y seteamos valores, inicializamos boleanas
+	//jugador
 	jugador = new Jugador(30);
-	jugador->setPosicion(31,23);  //x = 31 y = 23
+	jugador->setPosicion(31,23);  // setea posicion inicial del jugador x = 31 y = 23
+	//enemigos mandamos por constructor distintas velocidades
 	lotusPoni = new LotusPoni(4);
 	truenoLoco = new TruenoLoco(5);
 	obstaculo = new Obstaculo(2);
-	ui = new Ui();
-	ui->setVidas(jugador->getVidas());
+	
+	//nivel del juego
 	nivel = new Nivel();
-	nivel->dibujar();
+	
+	//Ui 
+	ui = new Ui(jugador->getVidas(), nivel->getNivel());
+	ui->setVidas(jugador->getVidas());
+	
+	//la introduccion
 	introduccion = new Introduccion();
-	epilogo = new Epilogo();
+	
+	//en el epilogo enviamos por constructor el valor inicial del puntaje
+	epilogo = new Epilogo(0);
+	
+	puntajeInicial = 0;
 }
 
 //destructor
@@ -55,7 +66,7 @@ void Juego::lanzarIntro(){
 }
 
 //lanza la escena de GAME OVER al juego:limpia pantalla y actualiza la misma
-void Juego::lanzarOutro(){
+void Juego::lanzarEpilogo(){
 	textbackground(BLACK);
 	clrscr();
 	epilogo->setPuntaje(ui->getPuntaje());
@@ -72,6 +83,9 @@ void Juego:: reiniciar(){
 	truenoLoco->reset();
 	obstaculo->reset();
 	epilogo->reset();
+	nivel -> reset();
+	ui->reset();
+	
 }
 
 //****************************************************
@@ -138,13 +152,13 @@ void Juego::jugar(){
 		
 		//dibuja el escenario del juego
 		nivel->dibujar();	
-		
+	
 		//bucle  para jugar mientras tenga vida
 		while(jugador->getVidas() > 0){ 
 			
 			//actualizamos la escena completa
 			actualizar();
-			
+				
 			//eventos para el teclado
 			eventos();
 			
@@ -153,11 +167,17 @@ void Juego::jugar(){
 			ui->setPuntaje(lotusPoni->getVueltas() + truenoLoco->getVueltas() + obstaculo->getVueltas());
 			ui->setVidas(jugador->getVidas());
 			
-			//si el puntaje alcanza multiplos de 20 aceleran los enemigos
+			
+			//si el puntaje alcanza multiplos de 20 aceleran los enemigos y se sube un nivel
 			if((ui->getPuntaje() %20 == 0) && (ui->getPuntaje() != 0)){
-				truenoLoco->acelerar();
-				lotusPoni->acelerar();
-				obstaculo->acelerar();
+				if(puntajeInicial != ui->getPuntaje()){
+					puntajeInicial = ui->getPuntaje();
+					truenoLoco->acelerar();
+					lotusPoni->acelerar();
+					obstaculo->acelerar();
+					nivel->subirNivel();
+					ui -> setNivel(nivel->getNivel());
+				}
 			}	
 			
 			//detecta colisiones entre los distintos objetos y muestra el choque
@@ -176,9 +196,10 @@ void Juego::jugar(){
 		Sleep(1000);
 		
 		//lanza la pantalla de game over
-		lanzarOutro();
+		lanzarEpilogo();
 		
-		// si es True sale del bucle = fin  del juego sino reinicia la jugada
+		// si es True sale del bucle y es el fin  del juego,
+		//sino llama a reiniciar la jugada
 		if(epilogo->getQuiereSalir()) {
 			epilogo->mostrarDespedida();
 			break; 
